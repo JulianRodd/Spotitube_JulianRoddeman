@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="nl.han.dea:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8eb3f913-abfb-4775-9647-3a5b80fb7886" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="afspeellijst: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="afspeellijsttrack: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="eigenaar: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="lied: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="track: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Spotitube" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spotitube: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="video: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Arquillian JUnit Test Class" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1YyzrrleqnDh0bz3XpcOY9LIPfM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="spotitubedomain" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\julia\Desktop\DEA-ICT\spotitube\realisatie\domain\nl.han.dea\src\main\java" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\julia\Desktop\DEA-ICT\spotitube\realisatie\domain\nl.han.dea\src\main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TomEE Server.TomEE 8.5.41">
+    <configuration name="Spotitube" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Domain.Spotitube" />
+      <module name="nl.han.dea" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TomEE 8.5.41" type="TomeeConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="TomEE 8.5.41" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/nl_han_dea_war/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="nl.han.dea:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/nl_han_dea_war" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_nl_han_dea_2" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="50651" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="nl.han.dea:war" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Spotitube" />
+      <item itemvalue="TomEE Server.TomEE 8.5.41" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Spotitube" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="TomEE Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8eb3f913-abfb-4775-9647-3a5b80fb7886" name="Default Changelist" comment="" />
+      <created>1583929823258</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583929823258</updated>
+      <workItem from="1583929825145" duration="11521000" />
+      <workItem from="1584001310286" duration="9961000" />
+      <workItem from="1584012126139" duration="1143000" />
+      <workItem from="1584096181574" duration="8572000" />
+      <workItem from="1584190040918" duration="10020000" />
+      <workItem from="1584357957899" duration="19000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="499" y="173" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1583930586967">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="499" y="173" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583930586967" />
+    <state x="213" y="89" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584108406182">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="213" y="89" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584108406182" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1584199899800">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584199899800" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1584004780810" />
+    <state x="344" y="343" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1584009001924">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="344" y="343" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.834@0.0.1536.834" timestamp="1584009001924" />
+    <state x="573" y="264" width="403" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584203150376">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="566" y="277" width="403" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583937330625" />
+    <state x="573" y="264" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.834@0.0.1536.834" timestamp="1584203150376" />
+    <state x="518" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584004811002">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="518" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583937352229" />
+    <state x="518" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1584004811002" />
+    <state x="549" y="173" key="FileChooserDialogImpl" timestamp="1583940153327">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="549" y="173" key="FileChooserDialogImpl/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583940153327" />
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1584203676365">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="100" key="GridCell.Tab.0.bottom/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202602757" />
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584203676365" />
+    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1584203676365">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="100" key="GridCell.Tab.0.center/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202602757" />
+    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1584203676365" />
+    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1584203676364">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="100" key="GridCell.Tab.0.left/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202602757" />
+    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1584203676364" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1584203676365">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="100" key="GridCell.Tab.0.right/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202602757" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1584203676365" />
+    <state width="1024" height="651" key="GridCell.Tab.1.bottom" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.1.bottom/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="651" key="GridCell.Tab.1.center" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.1.center/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="651" key="GridCell.Tab.1.left" timestamp="1584203676358">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.1.left/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1584203676358" />
+    <state width="1024" height="651" key="GridCell.Tab.1.right" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.1.right/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="651" key="GridCell.Tab.2.bottom" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.2.bottom/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.2.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="651" key="GridCell.Tab.2.center" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.2.center/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.2.center/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="651" key="GridCell.Tab.2.left" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.2.left/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.2.left/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="651" key="GridCell.Tab.2.right" timestamp="1584203676359">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="2" key="GridCell.Tab.2.right/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202239718" />
+    <state width="1024" height="651" key="GridCell.Tab.2.right/0.0.1536.834@0.0.1536.834" timestamp="1584203676359" />
+    <state width="1024" height="204" key="GridCell.Tab.3.bottom" timestamp="1584190149013">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.3.bottom/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149013" />
+    <state width="1024" height="204" key="GridCell.Tab.3.center" timestamp="1584190149012">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.3.center/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149012" />
+    <state width="1024" height="204" key="GridCell.Tab.3.left" timestamp="1584190149012">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.3.left/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149012" />
+    <state width="1024" height="204" key="GridCell.Tab.3.right" timestamp="1584190149012">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.3.right/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149012" />
+    <state width="1024" height="204" key="GridCell.Tab.4.bottom" timestamp="1584190149799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.4.bottom/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149799" />
+    <state width="1024" height="204" key="GridCell.Tab.4.center" timestamp="1584190149799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.4.center/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149799" />
+    <state width="1024" height="204" key="GridCell.Tab.4.left" timestamp="1584190149798">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.4.left/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149798" />
+    <state width="1024" height="204" key="GridCell.Tab.4.right" timestamp="1584190149799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1024" height="204" key="GridCell.Tab.4.right/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190149799" />
+    <state x="299" y="73" key="Maven.ArtifactSearchDialog" timestamp="1584001396020">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="299" y="73" key="Maven.ArtifactSearchDialog/0.0.1536.834@0.0.1536.834" timestamp="1584001396020" />
+    <state x="667" y="308" width="322" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1584008017171">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="667" y="308" width="322" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583940554794" />
+    <state x="667" y="308" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.834@0.0.1536.834" timestamp="1584008017171" />
+    <state x="349" y="73" key="com.intellij.database.dbimport.ImportDialog" timestamp="1583940681767">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="349" y="73" key="com.intellij.database.dbimport.ImportDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583940681767" />
+    <state x="499" y="223" key="com.intellij.database.dbimport.ImportUtil.MyDialog" timestamp="1583940677489">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="499" y="223" key="com.intellij.database.dbimport.ImportUtil.MyDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583940677489" />
+    <state x="566" y="243" width="403" height="336" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1584007541135">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="566" y="243" width="403" height="340" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583939273690" />
+    <state x="566" y="243" width="403" height="336" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1536.834@0.0.1536.834" timestamp="1584007541135" />
+    <state x="428" y="52" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584008175076">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="485" y="59" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583940576376" />
+    <state x="428" y="52" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.834@0.0.1536.834" timestamp="1584008175076" />
+    <state x="635" y="164" key="com.intellij.database.view.ui.DbObjectDialog" timestamp="1583939091575">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="635" y="164" key="com.intellij.database.view.ui.DbObjectDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583939091575" />
+    <state x="465" y="242" key="com.intellij.ide.util.TipDialog" timestamp="1584190058441">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="465" y="242" key="com.intellij.ide.util.TipDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584190058441" />
+    <state x="540" y="121" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1583931703435">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="540" y="121" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1583931703435" />
+    <state x="93" y="93" width="1350" height="648" key="dock-window-1" timestamp="1584006309500">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="93" y="93" width="1350" height="648" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1584006309500" />
+    <state x="499" y="173" key="extract.method.dialog" timestamp="1584105141802">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="499" y="173" key="extract.method.dialog/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584105141802" />
+    <state x="499" y="173" key="extract.method.dialog/0.0.1536.834@0.0.1536.834" timestamp="1584009352367" />
+    <state x="462" y="149" width="611" height="536" key="find.popup" timestamp="1584104655929">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="462" y="149" width="611" height="536" key="find.popup/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584104655929" />
+    <state x="425" y="189" key="run.anything.popup" timestamp="1584104231744">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="425" y="189" key="run.anything.popup/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584104231744" />
+    <state x="425" y="71" width="672" height="676" key="search.everywhere.popup" timestamp="1584202789402">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="425" y="71" width="672" height="676" key="search.everywhere.popup/0.0.1536.834/1920.0.1920.1050@0.0.1536.834" timestamp="1584202789402" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Domain/Eigenaar.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/Domain/Spotitube.java</url>
+          <line>27</line>
+          <properties class="Domain.Spotitube" method="main">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="e" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
