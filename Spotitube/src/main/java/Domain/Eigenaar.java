@@ -1,11 +1,10 @@
 package Domain;
 
 import Controller.DTOs.LoginDTO;
-import Datasource.DAOs.EigenaarDAO;
+import Datasource.DAOs.EigenaarDao;
 import Exceptions.EigenExcepties.OnjuistWachtwoordExceptie;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import javax.inject.Inject;
 import javax.sound.midi.Track;
 import javax.ws.rs.NotFoundException;
 import java.util.UUID;
@@ -19,23 +18,23 @@ public class Eigenaar {
 	private boolean ingelogd;
 
 	private Afspeellijst[] eigendom;
-	private EigenaarDAO eigenaarDAO;
+	private EigenaarDao eigenaarDAO;
 
-	public Eigenaar() {
-	}
 	public Eigenaar(String gebruikersnaam, String wachtwoord, boolean ingelogd) {
 		this.gebruikersnaam = gebruikersnaam;
 		this.wachtwoord = wachtwoord;
 		this.ingelogd = ingelogd;
+		eigenaarDAO = new EigenaarDao();
 	}
 
 	public void setIngelogd() throws OnjuistWachtwoordExceptie {
-		String wachtwoordHash = eigenaarDAO.selectWachtwoord(this.gebruikersnaam);
+		String wachtwoordHash = eigenaarDAO.select(this.gebruikersnaam, "wachtwoord");
 		if(wachtwoordHash!=null){
+			System.out.println(wachtwoordHash);
 			if((DigestUtils.sha256Hex(this.wachtwoord).equals(wachtwoordHash))){
-					String token = UUID.randomUUID().toString();
-					eigenaarDAO.updateToken(this.gebruikersnaam, token);
-					this.token = token;
+				String nieuweToken = UUID.randomUUID().toString();
+					eigenaarDAO.update(this.gebruikersnaam,"token", nieuweToken);
+					this.token = nieuweToken;
 					ingelogd = true;
 			}else{
 				throw new OnjuistWachtwoordExceptie();
@@ -55,13 +54,9 @@ public class Eigenaar {
 		return loginDTO;
 	}
 
-	public void wijzigAfspeellijst(Track tracks, String naam, int iid) {
+	public void wijzigAfspeellijst(Track tracks, String naam, int id) {
 
 	}
 
-	@Inject
-	public void setEigenaarDAO(EigenaarDAO eigenaarDAO){
-		this.eigenaarDAO = eigenaarDAO;
-	}
 
 }
