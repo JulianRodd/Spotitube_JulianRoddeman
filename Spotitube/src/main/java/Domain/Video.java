@@ -30,18 +30,4 @@ public class Video extends Track {
 		this.beschrijving = beschrijving;
 		this.publicatieDatum = publicatieDatum;
 	}
-
-	public TrackDTO mapToDTO() {
-	TrackDTO trackDTO = new TrackDTO();
-
-		trackDTO.setDuration(super.getAfspeelduur());
-		trackDTO.setId(super.getId());
-		trackDTO.setOfflineAvailable(super.isOfflineAvailable());
-		trackDTO.setPerformer(super.getPerformer());
-		trackDTO.setPlaycount(0);
-		trackDTO.setPublicationDate(publicatieDatum);
-		trackDTO.setTitle(super.getTitel());
-		trackDTO.setDescription(beschrijving);
-		return trackDTO;
-	}
 }

@@ -79,6 +79,7 @@ public class AfspeellijstDao {
                     afspeellijst = new Afspeellijst(resultSet.getInt("id"), resultSet.getString("naam"), resultSet.getString("eigenaar"));
                 return afspeellijst;
             }
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

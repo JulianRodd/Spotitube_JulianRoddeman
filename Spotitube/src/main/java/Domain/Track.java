@@ -1,7 +1,5 @@
 package Domain;
 
-import Controller.DTOs.TrackDTO;
-
 public abstract class Track {
 
 	private int id;
@@ -13,16 +11,16 @@ public abstract class Track {
 
 	private int resterendeTrackTijd;
 
-	private boolean offlineAvailable;
+	private boolean offlineBeschikbaar;
 
 	private String performer;
 
-	public Track(int id, String titel, String url, int afspeelduur, boolean offlineAvailable, String performer) {
+	public Track(int id, String titel, String url, int afspeelduur, boolean offlineBeschikbaar, String performer) {
 		this.id = id;
 		this.titel = titel;
 		this.url = url;
 		this.afspeelduur = afspeelduur;
-		this.offlineAvailable = offlineAvailable;
+		this.offlineBeschikbaar = offlineBeschikbaar;
 		this.performer = performer;
 	}
 
@@ -39,8 +37,6 @@ public abstract class Track {
 
 	}
 
-
-	public abstract TrackDTO mapToDTO();
 
 	public int getId() {
 		return id;
@@ -82,12 +78,12 @@ public abstract class Track {
 		this.resterendeTrackTijd = resterendeTrackTijd;
 	}
 
-	public boolean isOfflineAvailable() {
-		return offlineAvailable;
+	public boolean isOfflineBeschikbaar() {
+		return offlineBeschikbaar;
 	}
 
-	public void setOfflineAvailable(boolean offlineAvailable) {
-		this.offlineAvailable = offlineAvailable;
+	public void setOfflineBeschikbaar(boolean offlineBeschikbaar) {
+		this.offlineBeschikbaar = offlineBeschikbaar;
 	}
 
 	public String getPerformer() {

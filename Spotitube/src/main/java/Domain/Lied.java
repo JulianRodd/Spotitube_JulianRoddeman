@@ -36,16 +36,5 @@ public class Lied extends Track {
 	public void stopSpelen() {
 
 	}
-	public TrackDTO mapToDTO() {
-		TrackDTO trackDTO = new TrackDTO();
 
-		trackDTO.setDuration(super.getAfspeelduur());
-		trackDTO.setId(super.getId());
-		trackDTO.setOfflineAvailable(super.isOfflineAvailable());
-		trackDTO.setPerformer(super.getPerformer());
-		trackDTO.setPlaycount(0);
-		trackDTO.setAlbum(album);
-		trackDTO.setTitle(super.getTitel());
-		return trackDTO;
-	}
 }

@@ -1,7 +1,6 @@
 package Datasource.DAOs;
 
 import Datasource.util.DatabaseProperties;
-import Domain.Afspeellijst;
 import Domain.Lied;
 import Domain.Track;
 import Domain.Video;
@@ -31,7 +30,7 @@ public class TrackDAO {
                 statement.setString(1, track.getTitel());
                 statement.setString(2, track.getUrl());
                 statement.setInt(3, track.getAfspeelduur());
-                statement.setBoolean(4, track.isOfflineAvailable());
+                statement.setBoolean(4, track.isOfflineBeschikbaar());
                 statement.setString(5, track.getPerformer());
                 statement.setInt(6, track.getId());
                 statement.executeUpdate();
@@ -65,7 +64,7 @@ public class TrackDAO {
             statement.setString(1,track.getTitel());
             statement.setString(2,track.getUrl());
             statement.setInt(3,track.getAfspeelduur());
-            statement.setBoolean(4,track.isOfflineAvailable());
+            statement.setBoolean(4,track.isOfflineBeschikbaar());
             statement.setString(5,track.getPerformer());
             statement.setInt(6,track.getId());
             statement.executeUpdate();

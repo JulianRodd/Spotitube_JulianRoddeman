@@ -28,18 +28,5 @@ public class AfspeellijstDTO {
     public List<TrackDTO>  getTracks(){return tracks;}
     public boolean getOwner(){return owner;}
 
-    public Afspeellijst mapToDomain() {
-       Afspeellijst afspeellijst;
-       if(owner = true) {
-           afspeellijst = new Afspeellijst(this.id, this.name, "gebruiker0");
-       }else{
-           afspeellijst = new Afspeellijst(this.id, this.name, null);
-       }
-       List<Track> domainTracks = new ArrayList<Track>();
-       for( TrackDTO track :tracks){
-           domainTracks.add(track.mapToDomain());
-       }
-       afspeellijst.setTracks(domainTracks);
-       return afspeellijst;
-    }
+
 }

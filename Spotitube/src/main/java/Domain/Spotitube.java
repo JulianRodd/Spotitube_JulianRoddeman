@@ -3,7 +3,9 @@ package Domain;
 import Controller.DTOs.AfspeellijstDTO;
 import Controller.DTOs.AfspeellijstenDTO;
 import Datasource.DAOs.AfspeellijstDao;
+import Datasource.DAOs.EigenaarDao;
 import Datasource.DAOs.TrackDAO;
+import Exceptions.EigenExcepties.VerkeerdeTokenException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +19,11 @@ public class Spotitube {
     private Track[] track;
     private AfspeellijstDao afspeellijstDao;
     private TrackDAO trackDAO;
-
+    private EigenaarDao eigenaarDAO;
 
     public Spotitube() {
         afspeellijstDao = new AfspeellijstDao();
         trackDAO = new TrackDAO();
-    }
-
-    public String geefInlogFormulier() {
-        return null;
     }
 
     public Afspeellijst openAfspeellijst(int id) {
@@ -42,52 +40,31 @@ public class Spotitube {
         }
         return afspeellijsten;
     }
-
-    public void logIn(String gebruikersnaam, String wachtwoord) {
-
-    }
-
-    public Eigenaar valideerGegevens(String gebruikersnaam, String wachtwoord) {
-        return null;
-    }
-
     public List<Track> toonTrackOverzicht() {
         return trackDAO.getAlleTracks();
     }
-
-    public void maakAfspeellijst(Track tracks, String naam) {
-
-    }
-
-    public void speelTrackAf(Track track, Afspeellijst afspeellijst) {
-
-    }
-
-    public AfspeellijstenDTO mapToDTO(List<Afspeellijst> afspeellijsten) {
-        List<AfspeellijstDTO> afspeellijstDTOs = new ArrayList<AfspeellijstDTO>();
-        int lengte = 0;
-        for (Afspeellijst afspeellijst : afspeellijsten) {
-            afspeellijstDTOs.add(afspeellijst.mapToDTO());
-            lengte += afspeellijst.berekenAfspeellijstLengte();
-        }
-        AfspeellijstenDTO afspeellijstenDTO = new AfspeellijstenDTO();
-        afspeellijstenDTO.setPlaylists(afspeellijstDTOs);
-        afspeellijstenDTO.setLength(lengte);
-        return afspeellijstenDTO;
-    }
-
     public void verwijderAfspeellijst(int id) {
         afspeellijstDao.delete(id);
     }
 
-    public void voegNieuweAfspeellijstToe(Afspeellijst afspeellijst) {
-        afspeellijst.setId(afspeellijstDao.getMaxId()+1);
-        afspeellijstDao.insert(afspeellijst);
-            afspeellijst.voegTracksToe();
+    public Eigenaar getEigenaar(String token) throws VerkeerdeTokenException {
+        Eigenaar eigenaar = eigenaarDAO.getEigenaarMetToken(token);
+        if(eigenaar!=null){
+            return eigenaar;
+        }else{
+            throw new VerkeerdeTokenException();
+        }
     }
-
-    public void wijzigAfspeellijst(Afspeellijst afspeellijst) {
-        afspeellijst.updateTracks();
-        afspeellijstDao.update(afspeellijst);
-    }
+//    public void maakAfspeellijst(Track tracks, String naam) {
+//
+//    }
+//    public void logIn(String gebruikersnaam, String wachtwoord) {
+//
+//    }
+//    public String geefInlogFormulier() {
+//        return null;
+//    }
+//
+//    public void speelTrackAf(Track track, Afspeellijst afspeellijst) {
+//    }
 }

@@ -6,10 +6,10 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
+public class NietGevondenExceptionMapper implements ExceptionMapper<NotFoundException> {
 
     @Override
     public Response toResponse(NotFoundException e) {
-        return Response.status(401).entity(e).build();
+     return Response.status(401).entity(e).build();
     }
 }

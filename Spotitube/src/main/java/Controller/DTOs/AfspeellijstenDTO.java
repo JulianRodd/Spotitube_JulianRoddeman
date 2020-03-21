@@ -1,14 +1,14 @@
 package Controller.DTOs;
+
 import java.util.List;
 
 public class AfspeellijstenDTO {
-    List<AfspeellijstDTO> playlists;
-    int length;
+    private List<AfspeellijstDTO> playlists;
+    private int length;
 
     public void setPlaylists(List<AfspeellijstDTO> playlists) {
         this.playlists = playlists;
     }
-
     public List<AfspeellijstDTO> getPlaylists() {
         return playlists;
     }

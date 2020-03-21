@@ -86,13 +86,5 @@ public class TrackDTO {
         this.offlineAvailable = offlineAvailable;
     }
 
-    public Track mapToDomain() {
-        Track track;
-        if(album == null) {
-             track = new Video(id,title,null,duration,offlineAvailable,performer, publicationDate,description);
-        }else{
-             track = new Lied(id,title,null,duration,offlineAvailable,performer,album);
-        }
-        return track;
-    }
+
 }
