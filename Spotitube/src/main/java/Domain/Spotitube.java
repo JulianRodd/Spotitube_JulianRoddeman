@@ -1,12 +1,12 @@
 package Domain;
 
-import Controller.DTOs.AfspeellijstDTO;
-import Controller.DTOs.AfspeellijstenDTO;
-import Datasource.DAOs.AfspeellijstDao;
-import Datasource.DAOs.EigenaarDao;
+import Datasource.DAOs.AfspeellijstDAO;
+import Datasource.DAOs.EigenaarDAO;
+import Datasource.DAOs.EigenaarDAOImpl;
 import Datasource.DAOs.TrackDAO;
 import Exceptions.EigenExcepties.VerkeerdeTokenException;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,23 +17,31 @@ public class Spotitube {
     private List<Afspeellijst> afspeellijsten;
 
     private Track[] track;
-    private AfspeellijstDao afspeellijstDao;
+    private AfspeellijstDAO afspeellijstDAO;
     private TrackDAO trackDAO;
-    private EigenaarDao eigenaarDAO;
+    private EigenaarDAO eigenaarDAO;
+
+    @Inject
+    public void setEigenaarDAO(EigenaarDAO eigenaarDAO) {
+        this.eigenaarDAO = eigenaarDAO;
+    }
 
     public Spotitube() {
-        afspeellijstDao = new AfspeellijstDao();
+        afspeellijstDAO = new AfspeellijstDAO();
         trackDAO = new TrackDAO();
     }
 
     public Afspeellijst openAfspeellijst(int id) {
-       Afspeellijst afspeellijst = afspeellijstDao.selectAfspeellijst(id);
+       Afspeellijst afspeellijst = (Afspeellijst)afspeellijstDAO.select(id);
        afspeellijst.setTracks(afspeellijst.openTracksVoorAfspeellijst());
        return afspeellijst;
     }
 
     public List<Afspeellijst> openOverzicht() {
-        List<Afspeellijst> afspeellijsten = afspeellijstDao.selectAll();
+        List<Afspeellijst> afspeellijsten = new ArrayList<Afspeellijst>();
+                for(Object object:afspeellijstDAO.selectAll()){
+                    afspeellijsten.add((Afspeellijst)object);
+                }
         for (Afspeellijst afspeellijst : afspeellijsten) {
             List<Track> tracks = afspeellijst.getTracks();
                 afspeellijst.setTracks(tracks);
@@ -41,10 +49,14 @@ public class Spotitube {
         return afspeellijsten;
     }
     public List<Track> toonTrackOverzicht() {
-        return trackDAO.getAlleTracks();
+        List<Track> tracks = new ArrayList<Track>();
+        for(Object object :trackDAO.selectAll()){
+            tracks.add((Track)object);
+        }
+        return tracks;
     }
     public void verwijderAfspeellijst(int id) {
-        afspeellijstDao.delete(id);
+        afspeellijstDAO.delete(id);
     }
 
     public Eigenaar getEigenaar(String token) throws VerkeerdeTokenException {

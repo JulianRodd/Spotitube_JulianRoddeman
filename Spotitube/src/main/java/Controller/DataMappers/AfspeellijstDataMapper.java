@@ -35,7 +35,7 @@ public class AfspeellijstDataMapper {
         }
         afspeellijstDTO.setName(afspeellijst.getNaam());
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
-        for (Track track : afspeellijst.getTracks()) {
+        for (Track track : afspeellijst.openTracksVoorAfspeellijst()) {
             trackDTOs.add(trackDM.mapToDTO(track));
         }
         afspeellijstDTO.setTracks(trackDTOs);

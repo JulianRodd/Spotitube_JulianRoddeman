@@ -1,12 +1,13 @@
 package Domain;
 
 import Controller.DTOs.LoginDTO;
-import Datasource.DAOs.AfspeellijstDao;
-import Datasource.DAOs.EigenaarDao;
+import Datasource.DAOs.AfspeellijstDAO;
+import Datasource.DAOs.EigenaarDAO;
+import Datasource.DAOs.EigenaarDAOImpl;
 import Exceptions.EigenExcepties.OnjuistWachtwoordExceptie;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import javax.sound.midi.Track;
+import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,30 +17,51 @@ public class Eigenaar {
 
 	private String gebruikersnaam;
 	private String wachtwoord;
-	private String token;
-	private boolean ingelogd;
-	private List<Afspeellijst> eigendommen;
-	private EigenaarDao eigenaarDAO;
-	private AfspeellijstDao afspeellijstDao;
 
-	public Eigenaar(String gebruikersnaam, String wachtwoord, boolean ingelogd) {
+	public String getGebruikersnaam() {
+		return gebruikersnaam;
+	}
+
+	public void setGebruikersnaam(String gebruikersnaam) {
 		this.gebruikersnaam = gebruikersnaam;
+	}
+
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+
+	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
-		this.ingelogd = ingelogd;
-		eigenaarDAO = new EigenaarDao();
-		afspeellijstDao = new AfspeellijstDao();
+	}
+
+	private String token;
+	private List<Afspeellijst> eigendommen;
+	@Inject
+	private EigenaarDAO eigenaarDAO;
+	private AfspeellijstDAO afspeellijstDao;
+
+	public Eigenaar() {
+		afspeellijstDao = new AfspeellijstDAO();
 		eigendommen = new ArrayList<Afspeellijst>();
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	public void setIngelogd() throws OnjuistWachtwoordExceptie {
-		String wachtwoordHash = eigenaarDAO.select(this.gebruikersnaam, "wachtwoord");
+		System.out.println(eigenaarDAO);
+		String wachtwoordHash = ((Eigenaar) eigenaarDAO.select(gebruikersnaam)).getWachtwoord();
 		if(wachtwoordHash!=null){
 			System.out.println(wachtwoordHash);
 			if((DigestUtils.sha256Hex(this.wachtwoord).equals(wachtwoordHash))){
 				String nieuweToken = UUID.randomUUID().toString();
-					eigenaarDAO.update(this.gebruikersnaam,"token", nieuweToken);
-					this.token = nieuweToken;
-					ingelogd = true;
+				this.token = nieuweToken;
+					eigenaarDAO.update(this);
 			}else{
 				throw new OnjuistWachtwoordExceptie();
 			}
@@ -48,22 +70,20 @@ public class Eigenaar {
 		}
 	}
 
+
 	public void maakAfspeellijst(Afspeellijst afspeellijst) {
 		afspeellijst.setId(afspeellijstDao.getMaxId()+1);
 		afspeellijst.setEigenaar(gebruikersnaam);
 		afspeellijstDao.insert(afspeellijst);
 		afspeellijst.voegTracksToe();
 	}
-	public LoginDTO mapToDTO(){
-		LoginDTO loginDTO = new LoginDTO();
-		loginDTO.setUser(gebruikersnaam);
-		loginDTO.setToken(token);
-		return loginDTO;
-	}
 		public void wijzigAfspeellijst(Afspeellijst afspeellijst) {
 			afspeellijst.updateTracks();
 			afspeellijstDao.update(afspeellijst);
 	}
 
-
+	@Inject
+	public void setEigenaarDAO(EigenaarDAO eigenaarDAO) {
+		this.eigenaarDAO = eigenaarDAO;
+	}
 }

@@ -1,43 +1,36 @@
 package Domain;
+import Datasource.DAOs.AfspeellijstTrackDAO;
 import Datasource.DAOs.TrackDAO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Afspeellijst {
 
     private int id;
     private String naam;
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-
-    public void setEigenaar(String eigenaar) {
-        this.eigenaar = eigenaar;
-    }
-
-    public void setTrackDAO(TrackDAO trackDAO) {
-        this.trackDAO = trackDAO;
-    }
-
     private String eigenaar;
     private List<Domain.Track> tracks;
     private TrackDAO trackDAO;
+    private AfspeellijstTrackDAO afspeellijstTrackDAO;
 
     public Afspeellijst(int id, String naam, String eigenaar) {
         this.id = id;
         this.naam = naam;
         this.eigenaar = eigenaar;
         trackDAO = new TrackDAO();
+        afspeellijstTrackDAO = new AfspeellijstTrackDAO();
     }
 public void setId(int id){
         this.id = id;
 }
+
     public List<Track> getTracks() {
-        return trackDAO.getTracksVanAfspeellijst(id);
+        return tracks;
     }
     public int berekenAfspeellijstLengte() {
         int lengte = 0;
-        for (Track track : tracks) {
+        for (Track track : openTracksVoorAfspeellijst()) {
             lengte += track.getAfspeelduur();
         }
         return lengte;
@@ -60,11 +53,16 @@ public void setId(int id){
         }
     }
     public void voegTrackToe(Track track) {
-            trackDAO.insert(track, id);
+        trackDAO.insert(track);
+        afspeellijstTrackDAO.insert(this);
     }
     public void updateTracks() {
-        List<Track> teVerwijderenTracks = trackDAO.getTracksVanAfspeellijst(id);
-        trackDAO.detachTracksFromPlaylists(id);
+        List<Track> teVerwijderenTracks = new ArrayList<Track>();
+
+        for(Object object: afspeellijstTrackDAO.select(id)){
+            teVerwijderenTracks.add((Track)object);
+        }
+        afspeellijstTrackDAO.delete(id);
         for(Track teVerwijderenTrack :  teVerwijderenTracks){
             verwijderTrack(teVerwijderenTrack);
         }
@@ -72,10 +70,15 @@ public void setId(int id){
     }
 
     public void verwijderTrack(Track track) {
-        trackDAO.delete(track);
+        trackDAO.delete(track.getId());
     }
     public List<Track> openTracksVoorAfspeellijst() {
-        return trackDAO.getTracksVoorAfspeellijst(id);
+        List<Track> tracks = new ArrayList<Track>();
+
+        for(Object object: afspeellijstTrackDAO.select(id)){
+            tracks.add((Track)object);
+        }
+        return tracks;
     }
 
     //    public Track speelTrackAf() {
@@ -92,4 +95,15 @@ public void setId(int id){
  //   public int getAantalNummersOver() {
 //        return 0;
 //    }
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public void setEigenaar(String eigenaar) {
+        this.eigenaar = eigenaar;
+    }
+
+    public void setTrackDAO(TrackDAO trackDAO) {
+        this.trackDAO = trackDAO;
+    }
 }
