@@ -18,50 +18,53 @@ public class Spotitube {
     public void setAfspeellijstDAO(AfspeellijstDAO afspeellijstDAO) {
         this.afspeellijstDAO = afspeellijstDAO;
     }
+
     @Inject
     public void setTrackDAO(TrackDAO trackDAO) {
         this.trackDAO = trackDAO;
     }
+
     @Inject
     public void setEigenaarDAO(EigenaarDAO eigenaarDAO) {
         this.eigenaarDAO = eigenaarDAO;
     }
 
     public Afspeellijst openAfspeellijst(int id) {
-       Afspeellijst afspeellijst = (Afspeellijst)afspeellijstDAO.select(id);
-       afspeellijst.setTracks(afspeellijst.openTracksVoorAfspeellijst());
-       return afspeellijst;
+        Afspeellijst afspeellijst = (Afspeellijst) afspeellijstDAO.select(id);
+        afspeellijst.setTracks(afspeellijst.openTracksVoorAfspeellijst());
+        return afspeellijst;
     }
 
     public List<Afspeellijst> openOverzicht() {
         List<Afspeellijst> afspeellijsten = new ArrayList<Afspeellijst>();
-                for(Object object:afspeellijstDAO.selectAll()){
-                    afspeellijsten.add((Afspeellijst)object);
-                }
+        for (Object object : afspeellijstDAO.selectAll()) {
+            afspeellijsten.add((Afspeellijst) object);
+        }
         for (Afspeellijst afspeellijst : afspeellijsten) {
             List<Track> tracks = afspeellijst.getTracks();
-                afspeellijst.setTracks(tracks);
+            afspeellijst.setTracks(tracks);
         }
         return afspeellijsten;
     }
+
     public List<Track> toonTrackOverzicht() {
         List<Track> tracks = new ArrayList<Track>();
-        for(Object object :trackDAO.selectAll()){
-            tracks.add((Track)object);
+        for (Object object : trackDAO.selectAll()) {
+            tracks.add((Track) object);
         }
         return tracks;
     }
+
     public void verwijderAfspeellijst(int id) {
         afspeellijstDAO.delete(id);
     }
 
     public Eigenaar getEigenaar(String token) throws VerkeerdeTokenException {
         Eigenaar eigenaar = eigenaarDAO.getEigenaarMetToken(token);
-        if(eigenaar!=null){
+        if (eigenaar != null) {
             return eigenaar;
-        }else{
+        } else {
             throw new VerkeerdeTokenException(Response.status(401).build());
         }
     }
-
 }

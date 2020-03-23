@@ -15,12 +15,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/")
 public class EigenaarController {
-    EigenaarDataMapper eigenaarDM;
-    Eigenaar eigenaar;
-    @Inject
-    public void setEigenaar(Eigenaar eigenaar){
-        this.eigenaar = eigenaar;
-    }
+    private EigenaarDataMapper eigenaarDM;
     @Inject
     public void setEigenaarDM(EigenaarDataMapper eigenaarDM) {
         this.eigenaarDM = eigenaarDM;
@@ -31,7 +26,7 @@ public class EigenaarController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response Login(EigenaarDTO eigenaarDTO){
-        eigenaar = eigenaarDM.mapToDomain(eigenaarDTO);
+        Eigenaar eigenaar = eigenaarDM.mapToDomain(eigenaarDTO);
 
         try {
             eigenaar.setIngelogd();

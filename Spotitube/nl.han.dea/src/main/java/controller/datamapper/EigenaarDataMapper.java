@@ -5,7 +5,7 @@ import controller.dtos.LoginDTO;
 import domain.Eigenaar;
 
 public class EigenaarDataMapper {
-    public LoginDTO mapToDTO(Eigenaar eigenaar){
+    public LoginDTO mapToDTO(Eigenaar eigenaar) {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUser(eigenaar.getGebruikersnaam());
         loginDTO.setToken(eigenaar.getToken());

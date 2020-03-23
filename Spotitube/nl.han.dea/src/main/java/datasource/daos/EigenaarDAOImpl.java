@@ -12,17 +12,19 @@ import java.util.logging.Logger;
 public class EigenaarDAOImpl implements EigenaarDAO {
     private Logger logger = Logger.getLogger(getClass().getName());
     private DatabaseProperties databaseProperties;
+
     @Inject
     public void setDatabaseProperties(DatabaseProperties databaseProperties) {
         this.databaseProperties = databaseProperties;
     }
+
     @Override
     public Eigenaar select(String pk) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM eigenaar WHERE gebruikersNaam = ?");
-            statement.setString(1,pk);
+            statement.setString(1, pk);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Eigenaar eigenaar = new Eigenaar();
@@ -35,15 +37,16 @@ public class EigenaarDAOImpl implements EigenaarDAO {
         }
         return null;
     }
+
     @Override
     public void update(Eigenaar eigenaar) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement = connection.prepareStatement("UPDATE eigenaar SET  wachtwoord = ?, token = ? WHERE gebruikersNaam = ?");
-            statement.setString(1,eigenaar.getWachtwoord());
-            statement.setString(2,eigenaar.getToken());
-            statement.setString(3,eigenaar.getGebruikersnaam());
+            statement.setString(1, eigenaar.getWachtwoord());
+            statement.setString(2, eigenaar.getToken());
+            statement.setString(3, eigenaar.getGebruikersnaam());
             statement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -56,7 +59,7 @@ public class EigenaarDAOImpl implements EigenaarDAO {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM eigenaar WHERE token = ?");
-            statement.setString(1,token);
+            statement.setString(1, token);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Eigenaar eigenaar = new Eigenaar();

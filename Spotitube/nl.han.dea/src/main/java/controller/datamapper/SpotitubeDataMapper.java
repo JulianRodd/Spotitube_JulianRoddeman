@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpotitubeDataMapper {
-AfspeellijstDataMapper afspeellijstDM;
+    AfspeellijstDataMapper afspeellijstDM;
 
-@Inject
+    @Inject
     public void setAfspeellijstDM(AfspeellijstDataMapper afspeellijstDM) {
         this.afspeellijstDM = afspeellijstDM;
     }

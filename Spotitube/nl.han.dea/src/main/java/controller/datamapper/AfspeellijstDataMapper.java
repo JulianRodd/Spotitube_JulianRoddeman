@@ -20,12 +20,12 @@ public class AfspeellijstDataMapper {
 
     public Afspeellijst mapToDomain(AfspeellijstDTO afspeellijstDTO) {
         Afspeellijst afspeellijst;
-            afspeellijst = new Afspeellijst();
-                    afspeellijst.setId(afspeellijstDTO.getId());
-                    afspeellijst.setNaam(afspeellijstDTO.getName());
-                    afspeellijst.setEigenaar("gebruiker0");
+        afspeellijst = new Afspeellijst();
+        afspeellijst.setId(afspeellijstDTO.getId());
+        afspeellijst.setNaam(afspeellijstDTO.getName());
+        afspeellijst.setEigenaar("gebruiker0");
         List<Track> domainTracks = new ArrayList<Track>();
-        if(afspeellijstDTO.getTracks()!= null) {
+        if (afspeellijstDTO.getTracks() != null) {
             for (TrackDTO track : afspeellijstDTO.getTracks()) {
                 domainTracks.add(trackDM.mapToDomain(track));
             }
@@ -33,6 +33,7 @@ public class AfspeellijstDataMapper {
         afspeellijst.setTracks(domainTracks);
         return afspeellijst;
     }
+
     public AfspeellijstDTO mapToDTO(Afspeellijst afspeellijst) {
         AfspeellijstDTO afspeellijstDTO = new AfspeellijstDTO();
         afspeellijstDTO.setId(afspeellijst.getId());
