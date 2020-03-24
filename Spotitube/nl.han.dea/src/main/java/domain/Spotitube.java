@@ -13,7 +13,11 @@ public class Spotitube {
     private AfspeellijstDAO afspeellijstDAO;
     private TrackDAO trackDAO;
     private EigenaarDAO eigenaarDAO;
-
+    private Afspeellijst afspeellijst;
+    @Inject
+    public void setAfspeellijst(Afspeellijst afspeellijst) {
+        this.afspeellijst = afspeellijst;
+    }
     @Inject
     public void setAfspeellijstDAO(AfspeellijstDAO afspeellijstDAO) {
         this.afspeellijstDAO = afspeellijstDAO;

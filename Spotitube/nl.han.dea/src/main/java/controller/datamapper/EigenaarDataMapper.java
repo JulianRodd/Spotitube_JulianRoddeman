@@ -4,7 +4,16 @@ import controller.dtos.EigenaarDTO;
 import controller.dtos.LoginDTO;
 import domain.Eigenaar;
 
+import javax.inject.Inject;
+
 public class EigenaarDataMapper {
+    private Eigenaar eigenaar;
+
+@Inject
+    public void setEigenaar(Eigenaar eigenaar) {
+        this.eigenaar = eigenaar;
+    }
+
     public LoginDTO mapToDTO(Eigenaar eigenaar) {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUser(eigenaar.getGebruikersnaam());
@@ -13,9 +22,9 @@ public class EigenaarDataMapper {
     }
 
     public Eigenaar mapToDomain(EigenaarDTO eigenaarDTO) {
-        Eigenaar eigenaar = new Eigenaar();
         eigenaar.setGebruikersnaam(eigenaarDTO.getUser());
         eigenaar.setWachtwoord(eigenaarDTO.getPassword());
         return eigenaar;
     }
 }
+

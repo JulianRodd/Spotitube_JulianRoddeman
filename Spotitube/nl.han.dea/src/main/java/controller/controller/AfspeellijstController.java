@@ -27,6 +27,17 @@ public class AfspeellijstController {
     private AfspeellijstDataMapper afspeellijstDM;
     private TrackDataMapper trackDM;
     private Spotitube spotitube;
+    private Eigenaar eigenaar;
+@Inject
+    public void setEigenaar(Eigenaar eigenaar) {
+        this.eigenaar = eigenaar;
+    }
+    @Inject
+    public void setAfspeellijst(Afspeellijst afspeellijst) {
+        this.afspeellijst = afspeellijst;
+    }
+
+    private Afspeellijst afspeellijst;
 
     @Inject
     public void setSpotitube(Spotitube spotitube) {
@@ -52,15 +63,14 @@ public class AfspeellijstController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response alleAfspeellijsten(@DefaultValue("0") @QueryParam("token") String token) {
-        spotitube.getEigenaar(token);
+  spotitube.getEigenaar(token);
         return Response.ok().entity(spotitubeDM.mapToDTO(spotitube.openOverzicht())).build();
     }
 
     @Path("playlists/{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response verwijderAfspeellijst(@PathParam("id") int id, @QueryParam("token") String token) {
-        spotitube.getEigenaar(token);
+    public Response verwijderAfspeellijst(@PathParam("id") int id, @QueryParam("token") String token) { spotitube.getEigenaar(token);
         spotitube.verwijderAfspeellijst(id);
         return Response.ok().entity(spotitubeDM.mapToDTO(spotitube.openOverzicht())).build();
     }
@@ -69,7 +79,7 @@ public class AfspeellijstController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response voegAfspeellijstToe(AfspeellijstDTO afspeellijstDTO, @QueryParam("token") String token) {
-        Eigenaar eigenaar = spotitube.getEigenaar(token);
+        eigenaar = spotitube.getEigenaar(token);
         eigenaar.maakAfspeellijst(afspeellijstDM.mapToDomain(afspeellijstDTO));
         return Response.ok().entity(spotitubeDM.mapToDTO(spotitube.openOverzicht())).build();
 
@@ -79,7 +89,7 @@ public class AfspeellijstController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response wijzigAfspeellijstNaam(AfspeellijstDTO afspeellijstDTO, @PathParam("id") int id, @QueryParam("token") String token) {
-        Eigenaar eigenaar = spotitube.getEigenaar(token);
+        eigenaar = spotitube.getEigenaar(token);
         eigenaar.wijzigAfspeellijst(afspeellijstDM.mapToDomain(afspeellijstDTO));
         return Response.ok().entity(spotitubeDM.mapToDTO(spotitube.openOverzicht())).build();
     }
@@ -101,7 +111,7 @@ public class AfspeellijstController {
     public Response trackVanAfspeellijst(@PathParam("id") int id, @QueryParam("token") String token) {
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
         TracksDTO tracksDTO = new TracksDTO();
-        spotitube.getEigenaar(token);
+      spotitube.getEigenaar(token);
         List<Track> tracks;
         tracks = spotitube.openAfspeellijst(id).getTracks();
         for (Track track : tracks) {
@@ -115,15 +125,14 @@ public class AfspeellijstController {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Response trackVanAfspeellijst(@PathParam("afspeellijstId") int afspeellijstId, @PathParam("trackId") int trackId, @QueryParam("token") String token) {
-        spotitube.getEigenaar(token);
-        Afspeellijst afspeellijst = spotitube.openAfspeellijst(afspeellijstId);
+       spotitube.getEigenaar(token);
+        afspeellijst = spotitube.openAfspeellijst(afspeellijstId);
         for (Track track : afspeellijst.getTracks()) {
             if (track.getId() == trackId) {
                 afspeellijst.verwijderTrack(track);
             }
         }
-        AfspeellijstenDTO afspeellijstenDTO = spotitubeDM.mapToDTO(spotitube.openOverzicht());
-        return Response.ok().entity(afspeellijstenDTO).build();
+        return Response.ok().entity(spotitubeDM.mapToDTO(spotitube.openOverzicht())).build();
     }
 
     @Path("playlists/{id}/tracks")
@@ -132,9 +141,8 @@ public class AfspeellijstController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response trackAanPlaylistToevoegen(TrackDTO trackDTO, @PathParam("id") int id, @QueryParam("token") String token) {
         spotitube.getEigenaar(token);
-        Afspeellijst afspeellijst = spotitube.openAfspeellijst(id);
+        afspeellijst = spotitube.openAfspeellijst(id);
         afspeellijst.voegTrackToe(trackDM.mapToDomain(trackDTO));
-        AfspeellijstenDTO afspeellijstenDTO = spotitubeDM.mapToDTO(spotitube.openOverzicht());
-        return Response.ok().entity(afspeellijstenDTO).build();
+        return Response.ok().entity(spotitubeDM.mapToDTO(spotitube.openOverzicht())).build();
     }
 }

@@ -10,17 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AfspeellijstDataMapper {
+    private TrackDataMapper trackDM;
+    private Afspeellijst afspeellijst ;
+@Inject
+    public void setAfspeellijst(Afspeellijst afspeellijst) {
+        this.afspeellijst = afspeellijst;
+    }
+
     @Inject
     public void setTrackDM(TrackDataMapper trackDM) {
         this.trackDM = trackDM;
     }
 
-    private TrackDataMapper trackDM;
-
-
     public Afspeellijst mapToDomain(AfspeellijstDTO afspeellijstDTO) {
-        Afspeellijst afspeellijst;
-        afspeellijst = new Afspeellijst();
         afspeellijst.setId(afspeellijstDTO.getId());
         afspeellijst.setNaam(afspeellijstDTO.getName());
         afspeellijst.setEigenaar("gebruiker0");
