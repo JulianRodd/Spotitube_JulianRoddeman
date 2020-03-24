@@ -88,8 +88,8 @@ public class Afspeellijst {
     public List<Track> openTracksVoorAfspeellijst(int id) {
         List<Track> tracks = new ArrayList<Track>();
 
-        for (Object object : afspeellijstTrackDAO.select(id)) {
-            tracks.add((Track) object);
+        for (Track track : afspeellijstTrackDAO.select(id)) {
+            tracks.add(track);
         }
         return tracks;
     }

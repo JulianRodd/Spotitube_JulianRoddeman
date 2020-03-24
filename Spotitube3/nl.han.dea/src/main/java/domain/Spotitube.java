@@ -41,8 +41,8 @@ public class Spotitube {
 
     public List<Afspeellijst> openOverzicht() {
         List<Afspeellijst> afspeellijsten = new ArrayList<Afspeellijst>();
-        for (Object object : afspeellijstDAO.selectAll()) {
-            afspeellijsten.add((Afspeellijst) object);
+        for (Afspeellijst afspeellijst : afspeellijstDAO.selectAll()) {
+            afspeellijsten.add(afspeellijst);
         }
         for (Afspeellijst afspeellijst : afspeellijsten) {
             List<Track> tracks = this.afspeellijst.openTracksVoorAfspeellijst(afspeellijst.getId());
@@ -53,8 +53,8 @@ public class Spotitube {
 
     public List<Track> toonTrackOverzicht() {
         List<Track> tracks = new ArrayList<Track>();
-        for (Object object : trackDAO.selectAll()) {
-            tracks.add((Track) object);
+        for (Track track : trackDAO.selectAll()) {
+            tracks.add(track);
         }
         return tracks;
     }
