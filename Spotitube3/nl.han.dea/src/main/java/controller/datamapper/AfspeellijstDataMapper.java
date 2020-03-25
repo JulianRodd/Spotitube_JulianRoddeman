@@ -10,29 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AfspeellijstDataMapper {
-    private TrackDataMapper trackDM;
-    private Afspeellijst afspeellijst ;
-@Inject
-    public void setAfspeellijst(Afspeellijst afspeellijst) {
-        this.afspeellijst = afspeellijst;
-    }
-
+    private TrackDataMapper trackDataMapper;
     @Inject
-    public void setTrackDM(TrackDataMapper trackDM) {
-        this.trackDM = trackDM;
+    public void setTrackDataMapper(TrackDataMapper trackDataMapper) {
+        this.trackDataMapper = trackDataMapper;
     }
 
     public Afspeellijst mapToDomain(AfspeellijstDTO afspeellijstDTO) {
+        Afspeellijst afspeellijst = new Afspeellijst();
         afspeellijst.setId(afspeellijstDTO.getId());
         afspeellijst.setNaam(afspeellijstDTO.getName());
-        afspeellijst.setEigenaar("gebruiker0");
-        List<Track> domainTracks = new ArrayList<Track>();
-        if (afspeellijstDTO.getTracks() != null) {
-            for (TrackDTO track : afspeellijstDTO.getTracks()) {
-                domainTracks.add(trackDM.mapToDomain(track));
-            }
+        if(afspeellijstDTO.getOwner()){
+            afspeellijst.setEigenaar("gebruiker0");
         }
-        afspeellijst.setTracks(domainTracks);
+        if (afspeellijstDTO.getTracks() != null) {
+            List<Track> domainTracks = new ArrayList<Track>();
+            for (TrackDTO track : afspeellijstDTO.getTracks()) {
+                domainTracks.add(trackDataMapper.mapToDomain(track));
+            }
+            afspeellijst.setTracks(domainTracks);
+        }
         return afspeellijst;
     }
 
@@ -48,7 +45,7 @@ public class AfspeellijstDataMapper {
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
         List<Track> tracks = afspeellijst.getTracks();
         for (Track track : tracks ) {
-            trackDTOs.add(trackDM.mapToDTO(track));
+            trackDTOs.add(trackDataMapper.mapToDTO(track));
         }
         afspeellijstDTO.setTracks(trackDTOs);
 

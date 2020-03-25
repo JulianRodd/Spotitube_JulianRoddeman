@@ -21,6 +21,12 @@ public class Eigenaar {
     private String token;
     private EigenaarDAOImpl eigenaarDAO;
     private AfspeellijstDAO afspeellijstDao;
+    private Afspeellijst afspeellijst;
+
+@Inject
+    public void setAfspeellijst(Afspeellijst afspeellijst) {
+        this.afspeellijst = afspeellijst;
+    }
 
     @Inject
     public void setEigenaarDAO(EigenaarDAOImpl eigenaarDAO) {
@@ -33,12 +39,13 @@ public class Eigenaar {
     }
 
     public void setIngelogd(Eigenaar eigenaar) throws OnjuistWachtwoordExceptie {
-        String wachtwoordHash = ((Eigenaar) eigenaarDAO.select(eigenaar.getGebruikersnaam())).getWachtwoord();
-        if (wachtwoordHash != null) {
-            if ((DigestUtils.sha256Hex(eigenaar.getWachtwoord()).equals(wachtwoordHash))) {
+        Eigenaar geregistreerde = eigenaarDAO.select(eigenaar.getGebruikersnaam());
+        if(geregistreerde != null){
+        String wachtwoordHash =  geregistreerde.getWachtwoord();
+        if ((DigestUtils.sha256Hex(eigenaar.getWachtwoord()).equals(wachtwoordHash))) {
                 String nieuweToken = UUID.randomUUID().toString();
                 eigenaar.setToken(nieuweToken);
-                eigenaar.setToken(wachtwoordHash);
+                eigenaar.setWachtwoord(wachtwoordHash);
                 eigenaarDAO.update(eigenaar);
             } else {
                 throw new OnjuistWachtwoordExceptie();
@@ -52,11 +59,14 @@ public class Eigenaar {
     public void maakAfspeellijst(Afspeellijst afspeellijst) {
         afspeellijst.setId(afspeellijstDao.getMaxId() + 1);
         afspeellijstDao.insert(afspeellijst);
-        afspeellijst.voegTracksToe();
+        if(afspeellijst.getTracks()!=null) {
+            for (Track track : afspeellijst.getTracks()) {
+                this.afspeellijst.voegTrackToe(track, afspeellijst);
+            }
+        }
     }
 
     public void wijzigAfspeellijst(Afspeellijst afspeellijst) {
-        afspeellijst.updateTracks();
         afspeellijstDao.update(afspeellijst);
     }
 	public String getGebruikersnaam() {

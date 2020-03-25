@@ -5,7 +5,7 @@ import javax.ws.rs.core.Response;
 
 public class VerkeerdeTokenException extends NotAuthorizedException {
 
-    public VerkeerdeTokenException(Response response) {
-        super(response);
+    public VerkeerdeTokenException() {
+        super(Response.status(401).build());
     }
 }

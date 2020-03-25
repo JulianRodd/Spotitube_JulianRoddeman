@@ -19,59 +19,59 @@ class SpotitubeTest {
 
     @Test
     void testOpenAfspeellijst() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final Afspeellijst result = spotitubeUnderTest.openAfspeellijst(0);
+        // Act
+         Afspeellijst result = spotitubeUnderTest.openAfspeellijst(0);
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testOpenOverzicht() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final List<Afspeellijst> result = spotitubeUnderTest.openOverzicht();
+        // Act
+         List<Afspeellijst> result = spotitubeUnderTest.openOverzicht();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testToonTrackOverzicht() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final List<Track> result = spotitubeUnderTest.toonTrackOverzicht();
+        // Act
+         List<Track> result = spotitubeUnderTest.toonTrackOverzicht();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testVerwijderAfspeellijst() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         spotitubeUnderTest.verwijderAfspeellijst(0);
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testGetEigenaar() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final Eigenaar result = spotitubeUnderTest.getEigenaar("token");
+        // Act
+         Eigenaar result = spotitubeUnderTest.getEigenaar("token");
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testGetEigenaar_ThrowsVerkeerdeTokenException() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         assertThrows(VerkeerdeTokenException.class, () -> {
             spotitubeUnderTest.getEigenaar("token");
         });

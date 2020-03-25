@@ -21,19 +21,31 @@ public class AfspeellijstTrackDAO {
         this.databaseProperties = databaseProperties;
     }
 
-    public List<Track> select(int pk) {
+    public List<Track> select(int pk, boolean voorAfspeellijst) {
         List<Track> tracks = new ArrayList<>();
         try {
 
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
-            PreparedStatement statement = connection.prepareStatement("SELECT * " +
-                    "FROM track LEFT JOIN lied " +
-                    "ON track.id = lied.id " +
-                    "LEFT JOIN video " +
-                    "ON track.id=video.id " +
-                    "INNER JOIN afspeellijsttrack " +
-                    "ON afspeellijsttrack.trackId = track.id " +
-                    "WHERE afspeellijstId != ?");
+            PreparedStatement statement;
+            if(voorAfspeellijst) {
+                statement = connection.prepareStatement("SELECT * " +
+                        "FROM track LEFT JOIN lied " +
+                        "ON track.id = lied.id " +
+                        "LEFT JOIN video " +
+                        "ON track.id=video.id " +
+                        "INNER JOIN afspeellijsttrack " +
+                        "ON afspeellijsttrack.trackId = track.id " +
+                        "WHERE afspeellijstId != ?");
+            }else{
+                statement = connection.prepareStatement("SELECT * " +
+                        "FROM track LEFT JOIN lied " +
+                        "ON track.id = lied.id " +
+                        "LEFT JOIN video " +
+                        "ON track.id=video.id " +
+                        "INNER JOIN afspeellijsttrack " +
+                        "ON afspeellijsttrack.trackId = track.id " +
+                        "WHERE afspeellijstId = ?");
+            }
             statement.setInt(1, pk);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -47,7 +59,7 @@ public class AfspeellijstTrackDAO {
                     domain.Track track = new Video(resultSet.getInt("id"), resultSet.getString("titel"),
                             resultSet.getString("url"), resultSet.getInt("afspeelduur"),
                             resultSet.getBoolean("offlineAvailable"), resultSet.getString("performer"),
-                            resultSet.getString("publicatieDatum"), resultSet.getString("beschrijving"));
+                            resultSet.getString("publicatieDatum"), resultSet.getString("beschrijving"), resultSet.getInt("weergaven"));
                     tracks.add(track);
                 }
             }
@@ -57,12 +69,13 @@ public class AfspeellijstTrackDAO {
         return tracks;
     }
 
-    public void delete(int pk) {
+    public void deletePlaylistFromTrack(int afspeellijstId, int trackId) {
         try {
 
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
-            PreparedStatement statement1 = connection.prepareStatement("DELETE FROM afspeellijsttrack WHERE afspeellijstId = ?");
-            statement1.setInt(1, pk);
+            PreparedStatement statement1 = connection.prepareStatement("DELETE FROM afspeellijsttrack WHERE afspeellijstId = ? AND trackId = ?");
+            statement1.setInt(1, afspeellijstId);
+            statement1.setInt(2, trackId);
             statement1.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,11 +84,11 @@ public class AfspeellijstTrackDAO {
 
     public void insert(Afspeellijst afspeellijst) {
         try {
-            List<Track> tracks = select(afspeellijst.getId());
+            List<Track> tracks = select(afspeellijst.getId(),false);
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement;
-            for (Object track : tracks) {
-                if (!afspeellijst.getTracks().contains((Track) track)) {
+            for (Track track : afspeellijst.getTracks()) {
+                if (!tracks.contains(track)) {
                     statement = connection.prepareStatement("INSERT INTO afspeellijsttrack VALUES (?,?)");
                     statement.setInt(1, afspeellijst.getId());
                     statement.setInt(2, ((Track) track).getId());

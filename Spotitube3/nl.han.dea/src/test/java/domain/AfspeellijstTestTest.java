@@ -14,71 +14,71 @@ class AfspeellijstTestTest {
 
     @Test
     void testSetUp() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.setUp();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testTestBerekenAfspeellijstLengte() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.testBerekenAfspeellijstLengte();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testTestVoegTracksToe() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.testVoegTracksToe();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testTestVoegTrackToe() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.testVoegTrackToe();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testTestUpdateTracks() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.testUpdateTracks();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testTestVerwijderTrack() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.testVerwijderTrack();
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testTestOpenTracksVoorAfspeellijst() {
-        // Setup
+        // Arrange
 
-        // Run the test
+        // Act
         afspeellijstTestUnderTest.testOpenTracksVoorAfspeellijst();
 
-        // Verify the results
+        // Assert
     }
 }

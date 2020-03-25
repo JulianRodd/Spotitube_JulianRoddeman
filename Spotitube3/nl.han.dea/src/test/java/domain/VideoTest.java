@@ -8,6 +8,6 @@ class VideoTest {
 
     @BeforeEach
     void setUp() {
-        videoUnderTest = new Video(0, "titel", "url", 0, false, "performer", "publicatieDatum", "beschrijving");
+        videoUnderTest = new Video(0, "titel", "url", 0, false, "performer", "publicatieDatum", "beschrijving", 1);
     }
 }

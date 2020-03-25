@@ -36,10 +36,11 @@ public class TrackDAO{
                 statement.setInt(6, track.getId());
                 statement.executeUpdate();
                 if (track instanceof Video) {
-                    statement = connection.prepareStatement("INSERT INTO Video VALUES (?,?,?)");
+                    statement = connection.prepareStatement("INSERT INTO Video VALUES (?,?,?,?)");
                     statement.setString(1, ((Video) track).getPublicatieDatum());
                     statement.setString(2, ((Video) track).getBeschrijving());
-                    statement.setInt(3, track.getId());
+                    statement.setInt(3, ((Video) track).getAantalWeergaven());
+                    statement.setInt(4, track.getId());
                 } else if (track instanceof Lied) {
                     statement = connection.prepareStatement("INSERT INTO Lied VALUES (?,?)");
                     statement.setString(1, ((Lied) track).getAlbum());
@@ -64,10 +65,11 @@ public class TrackDAO{
             statement.setInt(6, track.getId());
             statement.executeUpdate();
             if (track instanceof Video) {
-                statement = connection.prepareStatement("UPDATE Video SET publicatieDatum = ?, beschrijving = ? WHERE id = ?)");
+                statement = connection.prepareStatement("UPDATE Video SET publicatieDatum = ?, beschrijving = ?, weergaven = ? WHERE id = ?)");
                 statement.setString(1, ((Video) track).getPublicatieDatum());
                 statement.setString(2, ((Video) track).getBeschrijving());
-                statement.setInt(3, track.getId());
+                statement.setInt(3, ((Video) track).getAantalWeergaven());
+                statement.setInt(4, track.getId());
             } else if (track instanceof Lied) {
                 statement = connection.prepareStatement("UPDATE Lied SET album = ? WHERE id = ?");
                 statement.setString(1, ((Lied) track).getAlbum());
@@ -124,7 +126,7 @@ public class TrackDAO{
                     domain.Track track = new Video(resultSet.getInt("id"), resultSet.getString("titel"),
                             resultSet.getString("url"), resultSet.getInt("afspeelduur"),
                             resultSet.getBoolean("offlineAvailable"), resultSet.getString("performer"),
-                            resultSet.getString("publicatieDatum"), resultSet.getString("beschrijving"));
+                            resultSet.getString("publicatieDatum"), resultSet.getString("beschrijving"), resultSet.getInt("weergaven"));
                     tracks.add(track);
                 }
             }

@@ -2,9 +2,15 @@ package controller.datamapper;
 
 import controller.dtos.EigenaarDTO;
 import controller.dtos.LoginDTO;
+import controller.dtos.TrackDTO;
 import domain.Eigenaar;
+import domain.Lied;
+import domain.Track;
+import domain.Video;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EigenaarDataMapperTest {
 
@@ -16,26 +22,33 @@ class EigenaarDataMapperTest {
     }
 
     @Test
-    void testMapToDTO() {
-        // Setup
-        final Eigenaar eigenaar = new Eigenaar();
-
-        // Run the test
-        final LoginDTO result = eigenaarDataMapperUnderTest.mapToDTO(eigenaar);
-
-        // Verify the results
-    }
-
-    @Test
     void testMapToDomain() {
-        // Setup
-        final EigenaarDTO eigenaarDTO = new EigenaarDTO();
+        // Arrange
+        var eigenaarDTO = new EigenaarDTO();
         eigenaarDTO.setUser("user");
         eigenaarDTO.setPassword("password");
 
-        // Run the test
-        final Eigenaar result = eigenaarDataMapperUnderTest.mapToDomain(eigenaarDTO);
+        // Act
+        var actual = eigenaarDataMapperUnderTest.mapToDomain(eigenaarDTO);
 
-        // Verify the results
+        // Assert
+        assertEquals(actual.getGebruikersnaam(), eigenaarDTO.getUser());
+        assertEquals(actual.getWachtwoord(),eigenaarDTO.getPassword());
     }
+
+    @Test
+    void testMapToDTO() {
+        // Arrange
+        var eigenaar = new Eigenaar();
+        eigenaar.setGebruikersnaam("user");
+        eigenaar.setWachtwoord("password");
+        eigenaar.setToken("1234");
+        // Act
+        var actual = eigenaarDataMapperUnderTest.mapToDTO(eigenaar);
+
+        // Assert
+        assertEquals(eigenaar.getGebruikersnaam(), actual.getUser());
+        assertEquals(eigenaar.getToken(), actual.getToken());
+    }
+
 }

@@ -4,8 +4,6 @@ import datasource.daos.*;
 import exceptions.eigenexcepties.VerkeerdeTokenException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class Spotitube {
 
     public Afspeellijst openAfspeellijst(int id) {
         Afspeellijst afspeellijst = (Afspeellijst) afspeellijstDAO.select(id);
-        afspeellijst.setTracks(this.afspeellijst.openTracksVoorAfspeellijst(afspeellijst.getId()));
+        afspeellijst.setTracks(this.afspeellijst.openTracksAfspeellijst(afspeellijst.getId(), false));
         return afspeellijst;
     }
 
@@ -45,7 +43,7 @@ public class Spotitube {
             afspeellijsten.add(afspeellijst);
         }
         for (Afspeellijst afspeellijst : afspeellijsten) {
-            List<Track> tracks = this.afspeellijst.openTracksVoorAfspeellijst(afspeellijst.getId());
+            List<Track> tracks = this.afspeellijst.openTracksAfspeellijst(afspeellijst.getId(), false);
             afspeellijst.setTracks(tracks);
         }
         return afspeellijsten;
@@ -68,7 +66,8 @@ public class Spotitube {
         if (eigenaar != null) {
             return eigenaar;
         } else {
-            throw new VerkeerdeTokenException(Response.status(401).build());
+            throw new VerkeerdeTokenException();
         }
     }
+
 }

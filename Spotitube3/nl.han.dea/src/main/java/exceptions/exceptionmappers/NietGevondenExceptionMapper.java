@@ -11,6 +11,6 @@ public class NietGevondenExceptionMapper implements ExceptionMapper<NotFoundExce
 
     @Override
     public Response toResponse(NotFoundException e) {
-     return Response.status(401).entity(e).build();
+     return Response.status(404).entity(e).build();
     }
 }

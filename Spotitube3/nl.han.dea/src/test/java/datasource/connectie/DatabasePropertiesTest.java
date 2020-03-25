@@ -16,12 +16,12 @@ class DatabasePropertiesTest {
 
     @Test
     void testConnectionString() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final String result = databasePropertiesUnderTest.connectionString();
+        // Act
+         String result = databasePropertiesUnderTest.connectionString();
 
-        // Verify the results
+        // Assert
         assertEquals("result", result);
     }
 }

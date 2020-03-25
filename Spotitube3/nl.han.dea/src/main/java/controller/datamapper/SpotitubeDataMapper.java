@@ -4,29 +4,28 @@ import controller.dtos.AfspeellijstDTO;
 import controller.dtos.AfspeellijstenDTO;
 import domain.Afspeellijst;
 
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpotitubeDataMapper {
-    private AfspeellijstDataMapper afspeellijstDM;
+    private AfspeellijstDataMapper afspeellijstDataMapper;
     private Afspeellijst afspeellijst;
 @Inject
-    public void setAfseellijst(Afspeellijst afseellijst) {
+    public void setAfspeellijst(Afspeellijst afseellijst) {
         this.afspeellijst = afseellijst;
     }
 
     @Inject
-    public void setAfspeellijstDM(AfspeellijstDataMapper afspeellijstDM) {
-        this.afspeellijstDM = afspeellijstDM;
+    public void setAfspeellijstDataMapper(AfspeellijstDataMapper afspeellijstDataMapper) {
+        this.afspeellijstDataMapper = afspeellijstDataMapper;
     }
 
     public AfspeellijstenDTO mapToDTO(List<Afspeellijst> afspeellijsten) {
         List<AfspeellijstDTO> afspeellijstDTOs = new ArrayList<AfspeellijstDTO>();
         int lengte = 0;
         for (Afspeellijst afspeellijst : afspeellijsten) {
-            afspeellijstDTOs.add(afspeellijstDM.mapToDTO(afspeellijst));
+            afspeellijstDTOs.add(afspeellijstDataMapper.mapToDTO(afspeellijst));
             lengte += this.afspeellijst.berekenAfspeellijstLengte(afspeellijst.getId());
         }
         AfspeellijstenDTO afspeellijstenDTO = new AfspeellijstenDTO();

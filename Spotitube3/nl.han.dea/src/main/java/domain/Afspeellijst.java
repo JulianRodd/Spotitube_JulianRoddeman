@@ -1,11 +1,9 @@
 package domain;
 
 import datasource.daos.AfspeellijstTrackDAO;
-import datasource.daos.DAO;
 import datasource.daos.TrackDAO;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class Afspeellijst {
 
     public int berekenAfspeellijstLengte(int id) {
         int lengte = 0;
-        for (Track track : openTracksVoorAfspeellijst(id)) {
+        for (Track track : openTracksAfspeellijst(id, false)) {
             lengte += track.getAfspeelduur();
         }
         return lengte;
@@ -60,38 +58,22 @@ public class Afspeellijst {
         return eigenaar;
     }
 
-    public void voegTracksToe() {
-        for (Track track : tracks) {
-            voegTrackToe(track);
-        }
-    }
 
-    public void voegTrackToe(Track track) {
-        trackDAO.insert(track);
-        afspeellijstTrackDAO.insert(this);
-    }
-
-    public void updateTracks() {
-        List<Track> teVerwijderenTracks = new ArrayList<Track>();
-        openTracksVoorAfspeellijst(id);
-        afspeellijstTrackDAO.delete(id);
-        for (Track teVerwijderenTrack : teVerwijderenTracks) {
-            verwijderTrack(teVerwijderenTrack);
-        }
-        voegTracksToe();
-    }
-
-    public void verwijderTrack(Track track) {
-        trackDAO.delete(track.getId());
-    }
-
-    public List<Track> openTracksVoorAfspeellijst(int id) {
-        List<Track> tracks = new ArrayList<Track>();
-
-        for (Track track : afspeellijstTrackDAO.select(id)) {
+        public void voegTrackToe(Track track, Afspeellijst afspeellijst) {
+            List<Track> tracks = afspeellijst.getTracks();
             tracks.add(track);
+            afspeellijst.setTracks(tracks);
+            trackDAO.insert(track);
+            afspeellijstTrackDAO.insert(afspeellijst);
         }
-        return tracks;
+
+    public void verwijderTrack(int afspeellijstId, int trackId) {
+        afspeellijstTrackDAO.deletePlaylistFromTrack(afspeellijstId, trackId);
+    }
+
+    public List<Track> openTracksAfspeellijst(int id, boolean voorAfspeellijst) {
+        return afspeellijstTrackDAO.select(id, voorAfspeellijst);
+
     }
 
     public void setNaam(String naam) {

@@ -18,64 +18,64 @@ class AfspeellijstTest {
 
     @Test
     void testBerekenAfspeellijstLengte() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final int result = afspeellijstUnderTest.berekenAfspeellijstLengte(0);
+        // Act
+         int result = afspeellijstUnderTest.berekenAfspeellijstLengte(0);
 
-        // Verify the results
+        // Assert
         assertEquals(0, result);
     }
 
     @Test
     void testVoegTracksToe() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        afspeellijstUnderTest.voegTracksToe();
+        // Act
 
-        // Verify the results
+
+        // Assert
     }
 
     @Test
     void testVoegTrackToe() {
-        // Setup
-        final Track track = null;
+        // Arrange
+         Track track = null;
 
-        // Run the test
-        afspeellijstUnderTest.voegTrackToe(track);
+        // Act
 
-        // Verify the results
+
+        // Assert
     }
 
     @Test
     void testUpdateTracks() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        afspeellijstUnderTest.updateTracks();
+        // Act
 
-        // Verify the results
+
+        // Assert
     }
 
     @Test
     void testVerwijderTrack() {
-        // Setup
-        final Track track = null;
+        // Arrange
+         Track track = null;
 
-        // Run the test
-        afspeellijstUnderTest.verwijderTrack(track);
+        // Act
+        afspeellijstUnderTest.verwijderTrack(1,1);
 
-        // Verify the results
+        // Assert
     }
 
     @Test
     void testOpenTracksVoorAfspeellijst() {
-        // Setup
+        // Arrange
 
-        // Run the test
-        final List<Track> result = afspeellijstUnderTest.openTracksVoorAfspeellijst(0);
+        // Act
+         List<Track> result = afspeellijstUnderTest.openTracksAfspeellijst(0, true);
 
-        // Verify the results
+        // Assert
     }
 }
