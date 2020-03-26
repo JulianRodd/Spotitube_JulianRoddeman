@@ -54,8 +54,7 @@ public class Afspeellijst {
             List<Track> tracks = afspeellijst.getTracks();
             tracks.add(track);
             afspeellijst.setTracks(tracks);
-            trackDAO.insert(track);
-            afspeellijstTrackDAO.insert(afspeellijst);
+            afspeellijstTrackDAO.insert(afspeellijst.getId(), track.getId());
         }
     public void verwijderTrack(int afspeellijstId, int trackId) {
         afspeellijstTrackDAO.deletePlaylistFromTrack(afspeellijstId, trackId);

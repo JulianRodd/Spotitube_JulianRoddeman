@@ -1,14 +1,11 @@
 package domain;
 
-import datasource.daos.AfspeellijstDAO;
 import datasource.daos.AfspeellijstTrackDAO;
-import datasource.daos.EigenaarDAOImpl;
 import datasource.daos.TrackDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -63,7 +60,8 @@ class AfspeellijstTest {
         // Arrange
         var track = new Lied(ID, "a", null, 1, true, "a", "a");
         var afspeellijst = new Afspeellijst();
-        doNothing().when(mockedAfspeellijstTrackDAO).insert(afspeellijst);
+        afspeellijst.setId(ID);
+        doNothing().when(mockedAfspeellijstTrackDAO).insert(afspeellijst.getId(), track.getId());
         // Act
         afspeellijstUnderTest.voegTrackToe(track, afspeellijst);
 
@@ -75,12 +73,13 @@ class AfspeellijstTest {
         // Arrange
         var track = new Lied(ID, "a", null, 1, true, "a", "a");
         var afspeellijst = new Afspeellijst();
+        afspeellijst.setId(ID);
         doNothing().when(mockedTrackDAO).insert(track);
         // Act
         afspeellijstUnderTest.voegTrackToe(track, afspeellijst);
 
         // Assert
-        verify(mockedAfspeellijstTrackDAO).insert(afspeellijst);
+        verify(mockedAfspeellijstTrackDAO).insert(afspeellijst.getId(), track.getId());
     }
 
 

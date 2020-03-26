@@ -6,7 +6,7 @@ import domain.Eigenaar;
 
 import javax.inject.Inject;
 
-public class EigenaarDataMapper {
+public class EigenaarDTODataMapper {
 
     public LoginDTO mapToDTO(Eigenaar eigenaar) {
         LoginDTO loginDTO = new LoginDTO();

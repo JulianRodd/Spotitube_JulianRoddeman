@@ -28,14 +28,18 @@ public class AfspeellijstTrackDAO {
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement;
             if(voorAfspeellijst) {
-                statement = connection.prepareStatement("SELECT * " +
-                        "FROM track LEFT JOIN lied " +
-                        "ON track.id = lied.id " +
-                        "LEFT JOIN video " +
-                        "ON track.id=video.id " +
-                        "INNER JOIN afspeellijsttrack " +
-                        "ON afspeellijsttrack.trackId = track.id " +
-                        "WHERE afspeellijstId != ?");
+                statement = connection.prepareStatement("SELECT *, track.id AS id " +
+                        "FROM Track " +
+                        "LEFT JOIN video v " +
+                        "                   ON track.id = v.id " +
+                        "LEFT JOIN lied l " +
+                        "                   ON track.id = l.id " +
+                        "WHERE track.id NOT IN( " +
+                        "SELECT trackId " +
+                        "FROM afspeellijsttrack " +
+                        "         INNER JOIN Track " +
+                        "                    ON afspeellijsttrack.trackId = track.Id " +
+                        "WHERE afspeellijstId = ?) ");
             }else{
                 statement = connection.prepareStatement("SELECT * " +
                         "FROM track LEFT JOIN lied " +
@@ -82,19 +86,14 @@ public class AfspeellijstTrackDAO {
         }
     }
 
-    public void insert(Afspeellijst afspeellijst) {
+    public void insert(int afspeellijstId, int trackId) {
         try {
-            List<Track> tracks = select(afspeellijst.getId(),false);
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement;
-            for (Track track : afspeellijst.getTracks()) {
-                if (!tracks.contains(track)) {
                     statement = connection.prepareStatement("INSERT INTO afspeellijsttrack VALUES (?,?)");
-                    statement.setInt(1, afspeellijst.getId());
-                    statement.setInt(2, ((Track) track).getId());
+                    statement.setInt(1, afspeellijstId);
+                    statement.setInt(2, trackId);
                     statement.executeUpdate();
-                }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

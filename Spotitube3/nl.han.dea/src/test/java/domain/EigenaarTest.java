@@ -1,28 +1,34 @@
 package domain;
 
 import datasource.daos.AfspeellijstDAO;
-import datasource.daos.EigenaarDAOImpl;
+import datasource.daos.EigenaarDAO;
+import domain.datamappers.EigenaarDataMapper;
 import exceptions.eigenexcepties.OnjuistWachtwoordExceptie;
+import exceptions.eigenexcepties.VerkeerdeTokenException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.NotFoundException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class EigenaarTest {
-
+    private static final String TOKEN = "1234";
     private Eigenaar eigenaarUnderTest;
-    private EigenaarDAOImpl mockedEigenaarDAO;
+    private EigenaarDAO mockedEigenaarDAO;
     private AfspeellijstDAO mockedAfspeellijstDAO;
+    private EigenaarDataMapper mockedEigenaarDataMapper;
     @BeforeEach
     void setUp() {
         eigenaarUnderTest = new Eigenaar();
-        this.mockedEigenaarDAO = mock(EigenaarDAOImpl.class);
+        this.mockedEigenaarDAO = mock(EigenaarDAO.class);
         this.mockedAfspeellijstDAO = mock(AfspeellijstDAO.class);
         this.eigenaarUnderTest.setEigenaarDAO(mockedEigenaarDAO);
         this.eigenaarUnderTest.setAfspeellijstDao(mockedAfspeellijstDAO);
+        this.mockedEigenaarDataMapper = mock(EigenaarDataMapper.class);
+        this.eigenaarUnderTest.setEigenaarDataMapper(mockedEigenaarDataMapper);
     }
 
     @Test
@@ -34,13 +40,12 @@ class EigenaarTest {
         var eigenaar = new Eigenaar ();
         eigenaar.setGebruikersnaam("gebruiker0");
         eigenaar.setWachtwoord("dc00c903852bb19eb250aeba05e534a6d211629d77d055033806b783bae09937");
-        when(mockedEigenaarDAO.select(inloggende.getGebruikersnaam())).thenReturn(eigenaar);
+        when(mockedEigenaarDataMapper.mapResultSetToDomain(mockedEigenaarDAO.select(inloggende.getGebruikersnaam()))).thenReturn(eigenaar);
         // Act
         eigenaarUnderTest.setIngelogd(inloggende);
 
         // Assert
-        verify(mockedEigenaarDAO).select(inloggende.getGebruikersnaam());
-
+        verify(mockedEigenaarDAO, times(2)).select(inloggende.getGebruikersnaam());
     }
     @Test
     void testSetIngelogdThrowtNiet() throws Exception {
@@ -51,7 +56,7 @@ class EigenaarTest {
          var eigenaar = new Eigenaar ();
          eigenaar.setGebruikersnaam("gebruiker0");
          eigenaar.setWachtwoord("dc00c903852bb19eb250aeba05e534a6d211629d77d055033806b783bae09937");
-         when(mockedEigenaarDAO.select(inloggende.getGebruikersnaam())).thenReturn(eigenaar);
+        when(mockedEigenaarDataMapper.mapResultSetToDomain(mockedEigenaarDAO.select(inloggende.getGebruikersnaam()))).thenReturn(eigenaar);
         doNothing().when(mockedEigenaarDAO).update(eigenaar);
         // Act
         eigenaarUnderTest.setIngelogd(inloggende);
@@ -69,7 +74,7 @@ class EigenaarTest {
         var eigenaar = new Eigenaar ();
         eigenaar.setGebruikersnaam("gebruiker0");
         eigenaar.setWachtwoord("foutiefWachtwoord");
-        when(mockedEigenaarDAO.select(inloggende.getGebruikersnaam())).thenReturn(eigenaar);
+        when(mockedEigenaarDataMapper.mapResultSetToDomain(mockedEigenaarDAO.select(inloggende.getGebruikersnaam()))).thenReturn(eigenaar);
         doNothing().when(mockedEigenaarDAO).update(eigenaar);
         //Act&Assert
         assertThrows(OnjuistWachtwoordExceptie.class, () -> eigenaarUnderTest.setIngelogd(inloggende));
@@ -117,5 +122,27 @@ class EigenaarTest {
         eigenaarUnderTest.wijzigAfspeellijst(afspeellijst);
         // Assert
         verify(mockedAfspeellijstDAO).update(afspeellijst);
+    }
+    @Test
+    void testGetEigenaarReturnJuisteEigenaar() {
+        // Arrange
+        var token = "1234";
+        var eigenaar = new Eigenaar();
+        eigenaar.setGebruikersnaam("gebruiker0");
+        when(mockedEigenaarDataMapper.mapResultSetToDomain(mockedEigenaarDAO.getEigenaarMetToken(TOKEN))).thenReturn(eigenaar);
+        // Act
+        Eigenaar actual = eigenaarUnderTest.getEigenaar(token);
+
+        // Assert
+        assertEquals(actual, eigenaar);
+    }
+
+    @Test
+    void testGetEigenaar_ThrowsVerkeerdeTokenException() {
+        // Arrange
+        var token = "1234";
+        when(mockedEigenaarDataMapper.mapResultSetToDomain(mockedEigenaarDAO.getEigenaarMetToken(TOKEN))).thenReturn(null);
+        //Act&Assert
+        assertThrows(VerkeerdeTokenException.class, () -> eigenaarUnderTest.getEigenaar(token));
     }
 }

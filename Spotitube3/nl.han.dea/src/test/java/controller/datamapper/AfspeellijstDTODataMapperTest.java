@@ -4,7 +4,6 @@ import controller.dtos.AfspeellijstDTO;
 import controller.dtos.TrackDTO;
 import domain.Afspeellijst;
 import domain.Lied;
-import domain.Track;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class AfspeellijstDataMapperTest {
+class AfspeellijstDTODataMapperTest {
 
-    private AfspeellijstDataMapper afspeellijstDataMapperUnderTest;
-    private TrackDataMapper mockedTrackDataMapper;
+    private AfspeellijstDTODataMapper afspeellijstDTODataMapperUnderTest;
+    private TrackDTODataMapper mockedTrackDTODataMapper;
 
     @BeforeEach
     void setUp() {
-        afspeellijstDataMapperUnderTest = new AfspeellijstDataMapper();
-        this.mockedTrackDataMapper = mock(TrackDataMapper.class);
-        this.afspeellijstDataMapperUnderTest.setTrackDataMapper(mockedTrackDataMapper);
+        afspeellijstDTODataMapperUnderTest = new AfspeellijstDTODataMapper();
+        this.mockedTrackDTODataMapper = mock(TrackDTODataMapper.class);
+        this.afspeellijstDTODataMapperUnderTest.setTrackDTODataMapper(mockedTrackDTODataMapper);
     }
 
     @Test
@@ -36,9 +35,9 @@ class AfspeellijstDataMapperTest {
          var trackDTO = new TrackDTO();
         var track = new Lied(1, "a", null,2,true, "a", "a");
         afspeellijstDTO.setTracks(Arrays.asList(trackDTO));
-        when(mockedTrackDataMapper.mapToDomain(trackDTO)).thenReturn(track);
+        when(mockedTrackDTODataMapper.mapToDomain(trackDTO)).thenReturn(track);
         // Act
-         Afspeellijst actual = afspeellijstDataMapperUnderTest.mapToDomain(afspeellijstDTO);
+         Afspeellijst actual = afspeellijstDTODataMapperUnderTest.mapToDomain(afspeellijstDTO);
         // Assert
         assertEquals(actual.getNaam(), afspeellijstDTO.getName());
         assertEquals(actual.getId(), afspeellijstDTO.getId());
@@ -57,9 +56,9 @@ class AfspeellijstDataMapperTest {
         var track = new Lied(1, "a", null,2,true, "a", "a");
         var trackDTO = new TrackDTO();
         afspeellijst.setTracks(Arrays.asList(track));
-        when(mockedTrackDataMapper.mapToDTO(track)).thenReturn(trackDTO);
+        when(mockedTrackDTODataMapper.mapToDTO(track)).thenReturn(trackDTO);
         // Act
-        AfspeellijstDTO actual = afspeellijstDataMapperUnderTest.mapToDTO(afspeellijst);
+        AfspeellijstDTO actual = afspeellijstDTODataMapperUnderTest.mapToDTO(afspeellijst);
         // Assert
         assertEquals(actual.getName(), afspeellijst.getNaam());
         assertEquals(actual.getId(), afspeellijst.getId());

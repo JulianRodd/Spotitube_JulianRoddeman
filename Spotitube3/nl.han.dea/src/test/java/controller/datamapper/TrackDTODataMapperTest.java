@@ -2,20 +2,19 @@ package controller.datamapper;
 
 import controller.dtos.TrackDTO;
 import domain.Lied;
-import domain.Track;
 import domain.Video;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TrackDataMapperTest {
+class TrackDTODataMapperTest {
 
-    private TrackDataMapper trackDataMapperUnderTest;
+    private TrackDTODataMapper trackDTODataMapperUnderTest;
 
     @BeforeEach
     void setUp() {
-        trackDataMapperUnderTest = new TrackDataMapper();
+        trackDTODataMapperUnderTest = new TrackDTODataMapper();
     }
 
     @Test
@@ -30,7 +29,7 @@ class TrackDataMapperTest {
         trackDTO.setOfflineAvailable(false);
 
         // Act
-        var actual = trackDataMapperUnderTest.mapToDomain(trackDTO);
+        var actual = trackDTODataMapperUnderTest.mapToDomain(trackDTO);
 
         // Assert
         assertEquals(actual.getId(), trackDTO.getId());
@@ -55,7 +54,7 @@ class TrackDataMapperTest {
         trackDTO.setOfflineAvailable(false);
 
         // Act
-        var actual = trackDataMapperUnderTest.mapToDomain(trackDTO);
+        var actual = trackDTODataMapperUnderTest.mapToDomain(trackDTO);
 
         // Assert
         assertEquals(actual.getId(), trackDTO.getId());
@@ -75,7 +74,7 @@ class TrackDataMapperTest {
         var track = new Lied(1, "a", null,2,true, "a", "a");
 
         // Act
-        var actual = trackDataMapperUnderTest.mapToDTO(track);
+        var actual = trackDTODataMapperUnderTest.mapToDTO(track);
 
         // Assert
         assertEquals(track.getId(), actual.getId());
@@ -92,7 +91,7 @@ class TrackDataMapperTest {
         var track = new Video(1, "a", null,2,true, "a", "a", "a", 1);
 
         // Act
-        var actual = trackDataMapperUnderTest.mapToDTO(track);
+        var actual = trackDTODataMapperUnderTest.mapToDTO(track);
 
 
         // Assert

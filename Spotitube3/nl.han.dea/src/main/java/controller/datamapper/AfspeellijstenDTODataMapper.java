@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpotitubeDataMapper {
-    private AfspeellijstDataMapper afspeellijstDataMapper;
+public class AfspeellijstenDTODataMapper {
+    private AfspeellijstDTODataMapper afspeellijstDTODataMapper;
     private Afspeellijst afspeellijst;
 @Inject
     public void setAfspeellijst(Afspeellijst afseellijst) {
@@ -17,15 +17,15 @@ public class SpotitubeDataMapper {
     }
 
     @Inject
-    public void setAfspeellijstDataMapper(AfspeellijstDataMapper afspeellijstDataMapper) {
-        this.afspeellijstDataMapper = afspeellijstDataMapper;
+    public void setAfspeellijstDTODataMapper(AfspeellijstDTODataMapper afspeellijstDTODataMapper) {
+        this.afspeellijstDTODataMapper = afspeellijstDTODataMapper;
     }
 
     public AfspeellijstenDTO mapToDTO(List<Afspeellijst> afspeellijsten) {
         List<AfspeellijstDTO> afspeellijstDTOs = new ArrayList<AfspeellijstDTO>();
         int lengte = 0;
         for (Afspeellijst afspeellijst : afspeellijsten) {
-            afspeellijstDTOs.add(afspeellijstDataMapper.mapToDTO(afspeellijst));
+            afspeellijstDTOs.add(afspeellijstDTODataMapper.mapToDTO(afspeellijst));
             lengte += this.afspeellijst.berekenAfspeellijstLengte(afspeellijst.getId());
         }
         AfspeellijstenDTO afspeellijstenDTO = new AfspeellijstenDTO();

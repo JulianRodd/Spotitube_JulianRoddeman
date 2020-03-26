@@ -2,7 +2,6 @@ package domain;
 
 import datasource.daos.AfspeellijstDAO;
 import datasource.daos.EigenaarDAO;
-import datasource.daos.EigenaarDAOImpl;
 import datasource.daos.TrackDAO;
 import exceptions.eigenexcepties.VerkeerdeTokenException;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +19,6 @@ class SpotitubeTest {
     private Spotitube spotitubeUnderTest;
     private AfspeellijstDAO mockedAfspeellijstDAO;
     private TrackDAO mockedTrackDAO;
-    private EigenaarDAO mockedEigenaarDAO;
     private Afspeellijst mockedAfspeellijst;
 
     @BeforeEach
@@ -28,11 +26,9 @@ class SpotitubeTest {
         spotitubeUnderTest = new Spotitube();
         this.mockedTrackDAO = mock(TrackDAO.class);
         this.mockedAfspeellijstDAO = mock(AfspeellijstDAO.class);
-        this.mockedEigenaarDAO = mock(EigenaarDAOImpl.class);
         this.mockedAfspeellijst = mock(Afspeellijst.class);
         this.spotitubeUnderTest.setTrackDAO(mockedTrackDAO);
         this.spotitubeUnderTest.setAfspeellijstDAO(mockedAfspeellijstDAO);
-        this.spotitubeUnderTest.setEigenaarDAO(mockedEigenaarDAO);
         this.spotitubeUnderTest.setAfspeellijst(mockedAfspeellijst);
     }
 
@@ -158,26 +154,4 @@ class SpotitubeTest {
         verify(mockedAfspeellijstDAO).delete(ID);
     }
 
-    @Test
-    void testGetEigenaarReturnJuisteEigenaar() {
-        // Arrange
-        var token = "1234";
-        var eigenaar = new Eigenaar();
-        eigenaar.setGebruikersnaam("gebruiker0");
-        when(mockedEigenaarDAO.getEigenaarMetToken(token)).thenReturn(eigenaar);
-        // Act
-         Eigenaar actual = spotitubeUnderTest.getEigenaar(token);
-
-        // Assert
-        assertEquals(actual, eigenaar);
-    }
-
-    @Test
-    void testGetEigenaar_ThrowsVerkeerdeTokenException() {
-        // Arrange
-         var token = "1234";
-         when(mockedEigenaarDAO.getEigenaarMetToken(token)).thenReturn(null);
-        //Act&Assert
-        assertThrows(VerkeerdeTokenException.class, () -> spotitubeUnderTest.getEigenaar(token));
-    }
 }

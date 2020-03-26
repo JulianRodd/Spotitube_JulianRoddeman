@@ -1,7 +1,6 @@
 package controller;
 
-import controller.EigenaarController;
-import controller.datamapper.EigenaarDataMapper;
+import controller.datamapper.EigenaarDTODataMapper;
 import controller.dtos.EigenaarDTO;
 import domain.Eigenaar;
 import exceptions.eigenexcepties.OnjuistWachtwoordExceptie;
@@ -19,15 +18,15 @@ class EigenaarControllerTest {
 
     private EigenaarController eigenaarControllerUnderTest;
     private Eigenaar mockedEigenaar;
-    private EigenaarDataMapper mockedEigenaarDataMapper;
+    private EigenaarDTODataMapper mockedEigenaarDTODataMapper;
 
     @BeforeEach
     void setUp() {
         eigenaarControllerUnderTest = new EigenaarController();
         this.mockedEigenaar = mock(Eigenaar.class);
-        this.mockedEigenaarDataMapper = mock(EigenaarDataMapper.class);
+        this.mockedEigenaarDTODataMapper = mock(EigenaarDTODataMapper.class);
         this.eigenaarControllerUnderTest.setEigenaar(mockedEigenaar);
-        this.eigenaarControllerUnderTest.setEigenaarDataMapper(mockedEigenaarDataMapper);
+        this.eigenaarControllerUnderTest.setEigenaarDTODataMapper(mockedEigenaarDTODataMapper);
     }
 
     @Test
@@ -37,7 +36,7 @@ class EigenaarControllerTest {
         Eigenaar eigenaar = new Eigenaar();
         eigenaar.setGebruikersnaam("gebruiker0");
         eigenaar.setWachtwoord("foutWachtwoord");
-        when(mockedEigenaarDataMapper.mapToDomain(eigenaarDTO)).thenReturn(eigenaar);
+        when(mockedEigenaarDTODataMapper.mapToDomain(eigenaarDTO)).thenReturn(eigenaar);
         doThrow(OnjuistWachtwoordExceptie.class).when(mockedEigenaar).setIngelogd(eigenaar);
         // Act
          Response result = eigenaarControllerUnderTest.login(eigenaarDTO);
@@ -51,7 +50,7 @@ class EigenaarControllerTest {
         Eigenaar eigenaar = new Eigenaar();
         eigenaar.setGebruikersnaam("gebruiker99999");
         eigenaar.setWachtwoord("wachtwoord");
-        when(mockedEigenaarDataMapper.mapToDomain(eigenaarDTO)).thenReturn(eigenaar);
+        when(mockedEigenaarDTODataMapper.mapToDomain(eigenaarDTO)).thenReturn(eigenaar);
         doThrow(NotFoundException.class).when(mockedEigenaar).setIngelogd(eigenaar);
         // Act&Assert
         assertThrows(NotFoundException.class, () -> eigenaarControllerUnderTest.login(eigenaarDTO));
@@ -65,7 +64,7 @@ class EigenaarControllerTest {
         Eigenaar eigenaar = new Eigenaar();
         eigenaar.setGebruikersnaam("gebruiker0");
         eigenaar.setGebruikersnaam("wachtwoord");
-        when(mockedEigenaarDataMapper.mapToDomain(eigenaarDTO)).thenReturn(eigenaar);
+        when(mockedEigenaarDTODataMapper.mapToDomain(eigenaarDTO)).thenReturn(eigenaar);
         // Act
         eigenaarControllerUnderTest.login(eigenaarDTO);
         // Assert
@@ -85,7 +84,7 @@ class EigenaarControllerTest {
         // Act
         eigenaarControllerUnderTest.login(eigenaarDTO);
         // Assert
-            verify(mockedEigenaarDataMapper).mapToDomain(eigenaarDTO);
+            verify(mockedEigenaarDTODataMapper).mapToDomain(eigenaarDTO);
     }
 
 

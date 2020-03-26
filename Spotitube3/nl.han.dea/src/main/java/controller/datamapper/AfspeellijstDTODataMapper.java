@@ -9,11 +9,11 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AfspeellijstDataMapper {
-    private TrackDataMapper trackDataMapper;
+public class AfspeellijstDTODataMapper {
+    private TrackDTODataMapper trackDTODataMapper;
     @Inject
-    public void setTrackDataMapper(TrackDataMapper trackDataMapper) {
-        this.trackDataMapper = trackDataMapper;
+    public void setTrackDTODataMapper(TrackDTODataMapper trackDTODataMapper) {
+        this.trackDTODataMapper = trackDTODataMapper;
     }
 
     public Afspeellijst mapToDomain(AfspeellijstDTO afspeellijstDTO) {
@@ -26,7 +26,7 @@ public class AfspeellijstDataMapper {
         if (afspeellijstDTO.getTracks() != null) {
             List<Track> domainTracks = new ArrayList<Track>();
             for (TrackDTO track : afspeellijstDTO.getTracks()) {
-                domainTracks.add(trackDataMapper.mapToDomain(track));
+                domainTracks.add(trackDTODataMapper.mapToDomain(track));
             }
             afspeellijst.setTracks(domainTracks);
         }
@@ -45,7 +45,7 @@ public class AfspeellijstDataMapper {
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
         List<Track> tracks = afspeellijst.getTracks();
         for (Track track : tracks ) {
-            trackDTOs.add(trackDataMapper.mapToDTO(track));
+            trackDTOs.add(trackDTODataMapper.mapToDTO(track));
         }
         afspeellijstDTO.setTracks(trackDTOs);
 

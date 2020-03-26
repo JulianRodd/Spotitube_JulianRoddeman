@@ -5,7 +5,7 @@ import domain.Lied;
 import domain.Track;
 import domain.Video;
 
-public class TrackDataMapper {
+public class TrackDTODataMapper {
     public Track mapToDomain(TrackDTO trackDTO) {
         Track track;
         if (trackDTO.getAlbum() == null) {

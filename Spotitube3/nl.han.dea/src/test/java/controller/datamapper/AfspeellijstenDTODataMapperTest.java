@@ -13,18 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class SpotitubeDataMapperTest {
+class AfspeellijstenDTODataMapperTest {
 
-    private SpotitubeDataMapper spotitubeDataMapperUnderTest;
-    private AfspeellijstDataMapper mockedAfspeellijstDataMapper;
+    private AfspeellijstenDTODataMapper afspeellijstenDTODataMapperUnderTest;
+    private AfspeellijstDTODataMapper mockedAfspeellijstDTODataMapper;
     private Afspeellijst mockedAfspeellijst;
     @BeforeEach
     void setUp() {
-        spotitubeDataMapperUnderTest = new SpotitubeDataMapper();
-        this.mockedAfspeellijstDataMapper = mock(AfspeellijstDataMapper.class);
+        afspeellijstenDTODataMapperUnderTest = new AfspeellijstenDTODataMapper();
+        this.mockedAfspeellijstDTODataMapper = mock(AfspeellijstDTODataMapper.class);
         this.mockedAfspeellijst = mock(Afspeellijst.class);
-        this.spotitubeDataMapperUnderTest.setAfspeellijstDataMapper(mockedAfspeellijstDataMapper);
-        this.spotitubeDataMapperUnderTest.setAfspeellijst(mockedAfspeellijst);
+        this.afspeellijstenDTODataMapperUnderTest.setAfspeellijstDTODataMapper(mockedAfspeellijstDTODataMapper);
+        this.afspeellijstenDTODataMapperUnderTest.setAfspeellijst(mockedAfspeellijst);
     }
 
 
@@ -38,10 +38,10 @@ class SpotitubeDataMapperTest {
         afspeellijstDTO.setName("name");
         afspeellijstDTO.setOwner(true);
          List<Afspeellijst> afspeellijsten = Arrays.asList(afspeellijst);
-            when(mockedAfspeellijstDataMapper.mapToDTO(afspeellijst)).thenReturn(afspeellijstDTO);
+            when(mockedAfspeellijstDTODataMapper.mapToDTO(afspeellijst)).thenReturn(afspeellijstDTO);
             when(mockedAfspeellijst.berekenAfspeellijstLengte(afspeellijst.getId())).thenReturn(lengte);
         // Act
-         AfspeellijstenDTO actual = spotitubeDataMapperUnderTest.mapToDTO(afspeellijsten);
+         AfspeellijstenDTO actual = afspeellijstenDTODataMapperUnderTest.mapToDTO(afspeellijsten);
         // Assert
         assertEquals(actual.getPlaylists().get(0),afspeellijstDTO);
         assertEquals(actual.getLength(),lengte);

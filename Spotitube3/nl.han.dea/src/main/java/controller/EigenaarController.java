@@ -1,6 +1,6 @@
 package controller;
 
-import controller.datamapper.EigenaarDataMapper;
+import controller.datamapper.EigenaarDTODataMapper;
 import controller.dtos.EigenaarDTO;
 import domain.Eigenaar;
 import exceptions.eigenexcepties.OnjuistWachtwoordExceptie;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/")
 public class EigenaarController {
-    private EigenaarDataMapper eigenaarDataMapper;
+    private EigenaarDTODataMapper eigenaarDTODataMapper;
     private Eigenaar eigenaar;
     @Inject
     public void setEigenaar(Eigenaar eigenaar) {
@@ -23,8 +23,8 @@ public class EigenaarController {
     }
 
     @Inject
-    public void setEigenaarDataMapper(EigenaarDataMapper eigenaarDataMapper) {
-        this.eigenaarDataMapper = eigenaarDataMapper;
+    public void setEigenaarDTODataMapper(EigenaarDTODataMapper eigenaarDTODataMapper) {
+        this.eigenaarDTODataMapper = eigenaarDTODataMapper;
     }
 
     @Path("login")
@@ -32,12 +32,12 @@ public class EigenaarController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(EigenaarDTO eigenaarDTO){
-        Eigenaar eigenaar = eigenaarDataMapper.mapToDomain(eigenaarDTO);
+        Eigenaar eigenaar = eigenaarDTODataMapper.mapToDomain(eigenaarDTO);
         try {
             this.eigenaar.setIngelogd(eigenaar);
         } catch (OnjuistWachtwoordExceptie e) {
             return Response.status(401).build();
         }
-        return Response.ok(eigenaarDataMapper.mapToDTO(eigenaar)).build();
+        return Response.ok(eigenaarDTODataMapper.mapToDTO(eigenaar)).build();
     }
 }

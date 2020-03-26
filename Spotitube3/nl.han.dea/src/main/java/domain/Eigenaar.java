@@ -1,7 +1,9 @@
 package domain;
 import datasource.daos.AfspeellijstDAO;
-import datasource.daos.EigenaarDAOImpl;
+import datasource.daos.EigenaarDAO;
+import domain.datamappers.EigenaarDataMapper;
 import exceptions.eigenexcepties.OnjuistWachtwoordExceptie;
+import exceptions.eigenexcepties.VerkeerdeTokenException;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;
@@ -13,11 +15,15 @@ public class Eigenaar {
     private String gebruikersnaam;
     private String wachtwoord;
     private String token;
-    private EigenaarDAOImpl eigenaarDAO;
+    private EigenaarDAO eigenaarDAO;
     private AfspeellijstDAO afspeellijstDao;
-
+    private EigenaarDataMapper eigenaarDataMapper;
     @Inject
-    public void setEigenaarDAO(EigenaarDAOImpl eigenaarDAO) {
+    public void setEigenaarDataMapper(EigenaarDataMapper eigenaarDataMapper) {
+        this.eigenaarDataMapper = eigenaarDataMapper;
+    }
+    @Inject
+    public void setEigenaarDAO(EigenaarDAO eigenaarDAO) {
         this.eigenaarDAO = eigenaarDAO;
     }
 
@@ -27,7 +33,7 @@ public class Eigenaar {
     }
 
     public void setIngelogd(Eigenaar eigenaar) throws OnjuistWachtwoordExceptie {
-        Eigenaar geregistreerde = eigenaarDAO.select(eigenaar.getGebruikersnaam());
+        Eigenaar geregistreerde = eigenaarDataMapper.mapResultSetToDomain(eigenaarDAO.select(eigenaar.getGebruikersnaam()));
         if(geregistreerde != null){
         String wachtwoordHash =  geregistreerde.getWachtwoord();
         if ((DigestUtils.sha256Hex(eigenaar.getWachtwoord()).equals(wachtwoordHash))) {
@@ -43,7 +49,14 @@ public class Eigenaar {
         }
     }
 
-
+    public Eigenaar getEigenaar(String token) throws VerkeerdeTokenException {
+        Eigenaar eigenaar = eigenaarDataMapper.mapResultSetToDomain(eigenaarDAO.getEigenaarMetToken(token));
+        if (eigenaar != null) {
+            return eigenaar;
+        } else {
+            throw new VerkeerdeTokenException();
+        }
+    }
     public void maakAfspeellijst(Afspeellijst afspeellijst) {
         afspeellijst.setId(afspeellijstDao.getMaxId() + 1);
         afspeellijstDao.insert(afspeellijst);
