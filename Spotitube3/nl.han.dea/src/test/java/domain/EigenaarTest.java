@@ -113,10 +113,9 @@ class EigenaarTest {
     void testWijzigAfspeellijst() {
         // Arrange
          Afspeellijst afspeellijst = new Afspeellijst();
-
         // Act
         eigenaarUnderTest.wijzigAfspeellijst(afspeellijst);
-
         // Assert
+        verify(mockedAfspeellijstDAO).update(afspeellijst);
     }
 }

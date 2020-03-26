@@ -1,81 +1,119 @@
 package domain;
 
+import datasource.daos.AfspeellijstDAO;
+import datasource.daos.AfspeellijstTrackDAO;
+import datasource.daos.EigenaarDAOImpl;
+import datasource.daos.TrackDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class AfspeellijstTest {
-
+    private static final int ID = 1;
     private Afspeellijst afspeellijstUnderTest;
+    private TrackDAO mockedTrackDAO;
+    private AfspeellijstTrackDAO mockedAfspeellijstTrackDAO;
 
     @BeforeEach
     void setUp() {
         afspeellijstUnderTest = new Afspeellijst();
+        this.mockedTrackDAO = mock(TrackDAO.class);
+        this.mockedAfspeellijstTrackDAO = mock(AfspeellijstTrackDAO.class);
+        this.afspeellijstUnderTest.setTrackDAO(mockedTrackDAO);
+        this.afspeellijstUnderTest.setAfspeellijstTrackDAO(mockedAfspeellijstTrackDAO);
     }
 
     @Test
-    void testBerekenAfspeellijstLengte() {
+    void testBerekenAfspeellijstRoeptSelectAan() {
         // Arrange
-
+        var tracks = new ArrayList<Track>();
+        var afspeelduur = 10;
+        tracks.add(new Lied(ID, "a", null, afspeelduur, true, "a", "a"));
+        tracks.add(new Lied(ID, "b", null, afspeelduur, true, "a", "a"));
         // Act
-         int result = afspeellijstUnderTest.berekenAfspeellijstLengte(0);
+        int actual = afspeellijstUnderTest.berekenAfspeellijstLengte(ID);
 
         // Assert
-        assertEquals(0, result);
+        verify(mockedAfspeellijstTrackDAO).select(ID, false);
     }
 
     @Test
-    void testVoegTracksToe() {
+    void testBerekenAfspeellijstLengteOfLengteKlopt() {
+        // Arrange
+        var tracks = new ArrayList<Track>();
+        var afspeelduur = 10;
+        tracks.add(new Lied(ID, "a", null, afspeelduur, true, "a", "a"));
+        tracks.add(new Lied(ID, "b", null, afspeelduur, true, "a", "a"));
+        when(mockedAfspeellijstTrackDAO.select(ID, false)).thenReturn(tracks);
+        // Act
+        int actual = afspeellijstUnderTest.berekenAfspeellijstLengte(ID);
+
+        // Assert
+        assertEquals(afspeelduur * 2, actual);
+    }
+
+
+    @Test
+    void testVoegTracksToeCallsTrackDAOInsert() {
+        // Arrange
+        var track = new Lied(ID, "a", null, 1, true, "a", "a");
+        var afspeellijst = new Afspeellijst();
+        doNothing().when(mockedAfspeellijstTrackDAO).insert(afspeellijst);
+        // Act
+        afspeellijstUnderTest.voegTrackToe(track, afspeellijst);
+
+        // Assert
+        verify(mockedTrackDAO).insert(track);
+    }
+    @Test
+    void testVoegTracksToeCallsAfspeellijstTrackDAOIInsert() {
+        // Arrange
+        var track = new Lied(ID, "a", null, 1, true, "a", "a");
+        var afspeellijst = new Afspeellijst();
+        doNothing().when(mockedTrackDAO).insert(track);
+        // Act
+        afspeellijstUnderTest.voegTrackToe(track, afspeellijst);
+
+        // Assert
+        verify(mockedAfspeellijstTrackDAO).insert(afspeellijst);
+    }
+
+
+    @Test
+    void testVerwijderTrackRoeptDeleteAan() {
         // Arrange
 
         // Act
-
+        afspeellijstUnderTest.verwijderTrack(ID, ID);
 
         // Assert
+        verify(mockedAfspeellijstTrackDAO).deletePlaylistFromTrack(ID,ID);
     }
 
     @Test
-    void testVoegTrackToe() {
+    void testOpenTracksVoorAfspeellijstRoeptSelectAanBijFalse() {
         // Arrange
-         Track track = null;
 
         // Act
-
+        afspeellijstUnderTest.openTracksAfspeellijst(ID, false);
 
         // Assert
+        verify(mockedAfspeellijstTrackDAO).select(ID, false);
     }
 
     @Test
-    void testUpdateTracks() {
+    void testOpenTracksVoorAfspeellijstRoeptSelectAanBijTrue() {
         // Arrange
 
         // Act
-
-
-        // Assert
-    }
-
-    @Test
-    void testVerwijderTrack() {
-        // Arrange
-         Track track = null;
-
-        // Act
-        afspeellijstUnderTest.verwijderTrack(1,1);
+        afspeellijstUnderTest.openTracksAfspeellijst(ID, true);
 
         // Assert
-    }
-
-    @Test
-    void testOpenTracksVoorAfspeellijst() {
-        // Arrange
-
-        // Act
-         List<Track> result = afspeellijstUnderTest.openTracksAfspeellijst(0, true);
-
-        // Assert
+        verify(mockedAfspeellijstTrackDAO).select(ID, true);
     }
 }

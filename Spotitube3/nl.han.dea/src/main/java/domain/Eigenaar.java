@@ -1,17 +1,11 @@
 package domain;
-
 import datasource.daos.AfspeellijstDAO;
-import datasource.daos.DAO;
-import datasource.daos.EigenaarDAO;
 import datasource.daos.EigenaarDAOImpl;
 import exceptions.eigenexcepties.OnjuistWachtwoordExceptie;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.NotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class Eigenaar {
@@ -21,12 +15,6 @@ public class Eigenaar {
     private String token;
     private EigenaarDAOImpl eigenaarDAO;
     private AfspeellijstDAO afspeellijstDao;
-    private Afspeellijst afspeellijst;
-
-@Inject
-    public void setAfspeellijst(Afspeellijst afspeellijst) {
-        this.afspeellijst = afspeellijst;
-    }
 
     @Inject
     public void setEigenaarDAO(EigenaarDAOImpl eigenaarDAO) {
@@ -59,11 +47,6 @@ public class Eigenaar {
     public void maakAfspeellijst(Afspeellijst afspeellijst) {
         afspeellijst.setId(afspeellijstDao.getMaxId() + 1);
         afspeellijstDao.insert(afspeellijst);
-        if(afspeellijst.getTracks()!=null) {
-            for (Track track : afspeellijst.getTracks()) {
-                this.afspeellijst.voegTrackToe(track, afspeellijst);
-            }
-        }
     }
 
     public void wijzigAfspeellijst(Afspeellijst afspeellijst) {

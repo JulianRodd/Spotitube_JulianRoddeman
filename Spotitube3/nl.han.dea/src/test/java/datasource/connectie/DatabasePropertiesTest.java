@@ -22,6 +22,6 @@ class DatabasePropertiesTest {
          String result = databasePropertiesUnderTest.connectionString();
 
         // Assert
-        assertEquals("result", result);
+        assertEquals("jdbc:mysql://localhost/Spotitube?user=root&password=dbrules&serverTimezone=UTC&autoReconnect=true&useSSL=false", result);
     }
 }

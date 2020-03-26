@@ -32,16 +32,14 @@ public class Spotitube {
     }
 
     public Afspeellijst openAfspeellijst(int id) {
-        Afspeellijst afspeellijst = (Afspeellijst) afspeellijstDAO.select(id);
+        Afspeellijst afspeellijst = afspeellijstDAO.select(id);
         afspeellijst.setTracks(this.afspeellijst.openTracksAfspeellijst(afspeellijst.getId(), false));
         return afspeellijst;
     }
 
     public List<Afspeellijst> openOverzicht() {
-        List<Afspeellijst> afspeellijsten = new ArrayList<Afspeellijst>();
-        for (Afspeellijst afspeellijst : afspeellijstDAO.selectAll()) {
-            afspeellijsten.add(afspeellijst);
-        }
+        List<Afspeellijst> afspeellijsten = afspeellijstDAO.selectAll();
+
         for (Afspeellijst afspeellijst : afspeellijsten) {
             List<Track> tracks = this.afspeellijst.openTracksAfspeellijst(afspeellijst.getId(), false);
             afspeellijst.setTracks(tracks);
@@ -50,11 +48,7 @@ public class Spotitube {
     }
 
     public List<Track> toonTrackOverzicht() {
-        List<Track> tracks = new ArrayList<Track>();
-        for (Track track : trackDAO.selectAll()) {
-            tracks.add(track);
-        }
-        return tracks;
+        return trackDAO.selectAll();
     }
 
     public void verwijderAfspeellijst(int id) {

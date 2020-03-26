@@ -25,57 +25,23 @@ public abstract class Track {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getTitel() {
         return titel;
     }
-
-    public void setTitel(String titel) {
-        this.titel = titel;
-    }
-
     public String getUrl() {
         return url;
     }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public int getAfspeelduur() {
         return afspeelduur;
     }
-
-    public void setAfspeelduur(int afspeelduur) {
-        this.afspeelduur = afspeelduur;
-    }
-
-    public int getResterendeTrackTijd() {
-        return resterendeTrackTijd;
-    }
-
-    public void setResterendeTrackTijd(int resterendeTrackTijd) {
-        this.resterendeTrackTijd = resterendeTrackTijd;
-    }
-
     public boolean isOfflineBeschikbaar() {
         return offlineBeschikbaar;
     }
-
-    public void setOfflineBeschikbaar(boolean offlineBeschikbaar) {
-        this.offlineBeschikbaar = offlineBeschikbaar;
-    }
-
     public String getPerformer() {
         return performer;
-    }
-
-    public void setPerformer(String performer) {
-        this.performer = performer;
     }
 
 }
