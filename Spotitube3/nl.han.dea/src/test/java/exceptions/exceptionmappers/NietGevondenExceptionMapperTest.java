@@ -19,13 +19,13 @@ class NietGevondenExceptionMapperTest {
 
     @Test
     void testToResponse() {
-        // Setup
-         NotFoundException e = new NotFoundException("message");
+        // Arrange
+        var e = new NotFoundException("bericht");
 
-        // Run the test
-         Response actual = nietGevondenExceptionMapperUnderTest.toResponse(e);
-        // Verify the results
+        // Act
+         var actual = nietGevondenExceptionMapperUnderTest.toResponse(e);
+        // Assert
         assertEquals(actual.getStatus(), 404);
-        assertEquals(actual.getEntity(), e);
+        assertEquals(actual.getEntity(), "Het item is niet gevonden: " + e);
     }
 }

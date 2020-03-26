@@ -4,13 +4,13 @@ import controller.dtos.AfspeellijstDTO;
 import controller.dtos.TrackDTO;
 import domain.Afspeellijst;
 import domain.Track;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AfspeellijstDTODataMapper {
     private TrackDTODataMapper trackDTODataMapper;
+
     @Inject
     public void setTrackDTODataMapper(TrackDTODataMapper trackDTODataMapper) {
         this.trackDTODataMapper = trackDTODataMapper;
@@ -20,7 +20,7 @@ public class AfspeellijstDTODataMapper {
         Afspeellijst afspeellijst = new Afspeellijst();
         afspeellijst.setId(afspeellijstDTO.getId());
         afspeellijst.setNaam(afspeellijstDTO.getName());
-        if(afspeellijstDTO.getOwner()){
+        if (afspeellijstDTO.getOwner()) {
             afspeellijst.setEigenaar("gebruiker0");
         }
         if (afspeellijstDTO.getTracks() != null) {
@@ -44,7 +44,7 @@ public class AfspeellijstDTODataMapper {
         afspeellijstDTO.setName(afspeellijst.getNaam());
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
         List<Track> tracks = afspeellijst.getTracks();
-        for (Track track : tracks ) {
+        for (Track track : tracks) {
             trackDTOs.add(trackDTODataMapper.mapToDTO(track));
         }
         afspeellijstDTO.setTracks(trackDTOs);

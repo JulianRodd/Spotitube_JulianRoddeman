@@ -2,14 +2,14 @@ package datasource.daos;
 
 import datasource.connectie.DatabaseProperties;
 import domain.Eigenaar;
+import exceptions.eigenexcepties.DatabaseFoutException;
+
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import java.sql.*;
-import java.util.logging.Logger;
 
 @Default
 public class EigenaarDAO {
-    private Logger logger = Logger.getLogger(getClass().getName());
     private DatabaseProperties databaseProperties;
 
     @Inject
@@ -26,9 +26,8 @@ public class EigenaarDAO {
             return statement.executeQuery();
 
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een select-fout opgetreden in de tabel eigenaar");
         }
-        return null;
     }
 
     public void update(Eigenaar eigenaar) {
@@ -40,6 +39,7 @@ public class EigenaarDAO {
             statement.setString(3, eigenaar.getGebruikersnaam());
             statement.executeUpdate();
         } catch (SQLException e) {
+            throw new DatabaseFoutException("\"Er is een update-fout opgetreden in de tabel eigenaar\"");
         }
     }
 
@@ -50,7 +50,7 @@ public class EigenaarDAO {
             statement.setString(1, token);
             return statement.executeQuery();
         } catch (SQLException e) {
+            throw new DatabaseFoutException("Er is een select-fout opgetreden in de tabel eigenaar");
         }
-        return null;
     }
 }

@@ -2,6 +2,7 @@ package domain;
 
 import datasource.daos.AfspeellijstTrackDAO;
 import datasource.daos.TrackDAO;
+import domain.datamappers.TrackDataMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +16,14 @@ class AfspeellijstTest {
     private Afspeellijst afspeellijstUnderTest;
     private TrackDAO mockedTrackDAO;
     private AfspeellijstTrackDAO mockedAfspeellijstTrackDAO;
-
+    private TrackDataMapper mockedTrackDataMapper;
     @BeforeEach
     void setUp() {
         afspeellijstUnderTest = new Afspeellijst();
         this.mockedTrackDAO = mock(TrackDAO.class);
         this.mockedAfspeellijstTrackDAO = mock(AfspeellijstTrackDAO.class);
+        this.mockedTrackDataMapper = mock(TrackDataMapper.class);
+        this.afspeellijstUnderTest.setTrackDataMapper(mockedTrackDataMapper);
         this.afspeellijstUnderTest.setTrackDAO(mockedTrackDAO);
         this.afspeellijstUnderTest.setAfspeellijstTrackDAO(mockedAfspeellijstTrackDAO);
     }
@@ -30,8 +33,8 @@ class AfspeellijstTest {
         // Arrange
         var tracks = new ArrayList<Track>();
         var afspeelduur = 10;
-        tracks.add(new Lied(ID, "a", null, afspeelduur, true, "a", "a"));
-        tracks.add(new Lied(ID, "b", null, afspeelduur, true, "a", "a"));
+        tracks.add(new Lied(ID, "a",  afspeelduur, true, "a", "a"));
+        tracks.add(new Lied(ID, "b",  afspeelduur, true, "a", "a"));
         // Act
         int actual = afspeellijstUnderTest.berekenAfspeellijstLengte(ID);
 
@@ -44,9 +47,9 @@ class AfspeellijstTest {
         // Arrange
         var tracks = new ArrayList<Track>();
         var afspeelduur = 10;
-        tracks.add(new Lied(ID, "a", null, afspeelduur, true, "a", "a"));
-        tracks.add(new Lied(ID, "b", null, afspeelduur, true, "a", "a"));
-        when(mockedAfspeellijstTrackDAO.select(ID, false)).thenReturn(tracks);
+        tracks.add(new Lied(ID, "a", afspeelduur, true, "a", "a"));
+        tracks.add(new Lied(ID, "b",  afspeelduur, true, "a", "a"));
+        when(mockedTrackDataMapper.mapResultSetToListDomain(mockedAfspeellijstTrackDAO.select(ID, false))).thenReturn(tracks);
         // Act
         int actual = afspeellijstUnderTest.berekenAfspeellijstLengte(ID);
 
@@ -56,25 +59,11 @@ class AfspeellijstTest {
 
 
     @Test
-    void testVoegTracksToeCallsTrackDAOInsert() {
-        // Arrange
-        var track = new Lied(ID, "a", null, 1, true, "a", "a");
-        var afspeellijst = new Afspeellijst();
-        afspeellijst.setId(ID);
-        doNothing().when(mockedAfspeellijstTrackDAO).insert(afspeellijst.getId(), track.getId());
-        // Act
-        afspeellijstUnderTest.voegTrackToe(track, afspeellijst);
-
-        // Assert
-        verify(mockedTrackDAO).insert(track);
-    }
-    @Test
     void testVoegTracksToeCallsAfspeellijstTrackDAOIInsert() {
         // Arrange
-        var track = new Lied(ID, "a", null, 1, true, "a", "a");
+        var track = new Lied(ID, "a", 1, true, "a", "a");
         var afspeellijst = new Afspeellijst();
         afspeellijst.setId(ID);
-        doNothing().when(mockedTrackDAO).insert(track);
         // Act
         afspeellijstUnderTest.voegTrackToe(track, afspeellijst);
 
@@ -91,7 +80,7 @@ class AfspeellijstTest {
         afspeellijstUnderTest.verwijderTrack(ID, ID);
 
         // Assert
-        verify(mockedAfspeellijstTrackDAO).deletePlaylistFromTrack(ID,ID);
+        verify(mockedAfspeellijstTrackDAO).delete(ID,ID);
     }
 
     @Test

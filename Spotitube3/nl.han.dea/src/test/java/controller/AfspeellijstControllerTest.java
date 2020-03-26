@@ -228,6 +228,24 @@ class AfspeellijstControllerTest {
         assertThrows(VerkeerdeTokenException.class, () -> afspeellijstControllerUnderTest.trackVanAfspeellijst( ID, TOKEN));
     }
     @Test
+    void testVerwijderTrackVanAfspeellijstRoeptOpenTracksAfspeellijstAan() {
+        // Arrange
+        when(mockedEigenaar.getEigenaar(TOKEN)).thenReturn(null);
+        // Act
+        Response result = afspeellijstControllerUnderTest.verwijderTrackVanAfspeellijst(ID,ID,TOKEN);
+        // Assert
+        verify(mockedAfspeellijst).verwijderTrack(ID,ID);
+    }
+    @Test
+    void testVerwijderTrackVanAfspeellijstThrowsVerkeerdeTokenExceptie() {
+        // Arrange
+        List<Track> tracks = new ArrayList<Track>();
+        when(mockedAfspeellijst.openTracksAfspeellijst(ID, false)).thenReturn(tracks);
+        doThrow(VerkeerdeTokenException.class).when(mockedEigenaar).getEigenaar(TOKEN);
+        // Act&Assert
+        assertThrows(VerkeerdeTokenException.class, () -> afspeellijstControllerUnderTest.verwijderTrackVanAfspeellijst(ID,ID,TOKEN));
+    }
+    @Test
     void testTrackAanPlaylistToevoegenRoeptVoegTrackToeAan() {
         // Arrange
         when(mockedEigenaar.getEigenaar(TOKEN)).thenReturn(null);
@@ -254,7 +272,7 @@ when(mockedSpotitube.openAfspeellijst(ID)).thenReturn(afspeellijst);
         // Arrange
         TrackDTO trackDTO = new TrackDTO();
         var afspeellijstenDTO = new AfspeellijstenDTO();
-        var track = new Lied(ID, "a", null,2,true, "a", "a");
+        var track = new Lied(ID, "a", 2,true, "a", "a");
         Afspeellijst afspeellijst = new Afspeellijst();
         when(mockedSpotitube.openAfspeellijst(ID)).thenReturn(afspeellijst);
         when(mockedTrackDTODataMapper.mapToDomain(trackDTO)).thenReturn(track);

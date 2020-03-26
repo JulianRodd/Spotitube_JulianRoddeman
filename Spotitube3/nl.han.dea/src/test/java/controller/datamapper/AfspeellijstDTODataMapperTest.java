@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AfspeellijstDTODataMapperTest {
-
+    private static final int ID = 1;
     private AfspeellijstDTODataMapper afspeellijstDTODataMapperUnderTest;
     private TrackDTODataMapper mockedTrackDTODataMapper;
 
@@ -29,11 +29,11 @@ class AfspeellijstDTODataMapperTest {
     void testMapToDomain() {
         // Arrange
          var afspeellijstDTO = new AfspeellijstDTO();
-        afspeellijstDTO.setId(0);
+        afspeellijstDTO.setId(ID);
         afspeellijstDTO.setName("name");
         afspeellijstDTO.setOwner(false);
          var trackDTO = new TrackDTO();
-        var track = new Lied(1, "a", null,2,true, "a", "a");
+        var track = new Lied(ID, "a", 2,true, "a", "a");
         afspeellijstDTO.setTracks(Arrays.asList(trackDTO));
         when(mockedTrackDTODataMapper.mapToDomain(trackDTO)).thenReturn(track);
         // Act
@@ -50,10 +50,10 @@ class AfspeellijstDTODataMapperTest {
     void testMapToDTO() {
         // Arrange
         var afspeellijst = new Afspeellijst();
-        afspeellijst.setId(0);
+        afspeellijst.setId(ID);
         afspeellijst.setNaam("name");
         afspeellijst.setEigenaar("gebruiker0");
-        var track = new Lied(1, "a", null,2,true, "a", "a");
+        var track = new Lied(ID, "a", 2,true, "a", "a");
         var trackDTO = new TrackDTO();
         afspeellijst.setTracks(Arrays.asList(track));
         when(mockedTrackDTODataMapper.mapToDTO(track)).thenReturn(trackDTO);

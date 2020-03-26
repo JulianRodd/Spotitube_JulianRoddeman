@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TrackDTODataMapperTest {
-
+    private static final int ID = 1;
     private TrackDTODataMapper trackDTODataMapperUnderTest;
 
     @BeforeEach
@@ -21,7 +21,7 @@ class TrackDTODataMapperTest {
     void testMapToDomainMetLied() {
         // Arrange
          var trackDTO = new TrackDTO();
-        trackDTO.setId(0);
+        trackDTO.setId( ID);
         trackDTO.setTitle("title");
         trackDTO.setPerformer("performer");
         trackDTO.setDuration(0);
@@ -44,7 +44,7 @@ class TrackDTODataMapperTest {
     void testMapToDomainMetVideo() {
         // Arrange
         var trackDTO = new TrackDTO();
-        trackDTO.setId(0);
+        trackDTO.setId( ID);
         trackDTO.setTitle("title");
         trackDTO.setPerformer("performer");
         trackDTO.setDuration(0);
@@ -71,7 +71,7 @@ class TrackDTODataMapperTest {
     @Test
     void testMapToDTOMetLied() {
         // Arrange
-        var track = new Lied(1, "a", null,2,true, "a", "a");
+        var track = new Lied( ID, "a", 2,true, "a", "a");
 
         // Act
         var actual = trackDTODataMapperUnderTest.mapToDTO(track);
@@ -88,7 +88,7 @@ class TrackDTODataMapperTest {
     @Test
     void testMapToDTOMetVideo() {
         // Arrange
-        var track = new Video(1, "a", null,2,true, "a", "a", "a", 1);
+        var track = new Video( ID, "a", 2,true, "a", "a", "a", 1);
 
         // Act
         var actual = trackDTODataMapperUnderTest.mapToDTO(track);

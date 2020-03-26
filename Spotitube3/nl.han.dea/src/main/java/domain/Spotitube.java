@@ -1,7 +1,8 @@
 package domain;
 
 import datasource.daos.*;
-import exceptions.eigenexcepties.VerkeerdeTokenException;
+import domain.datamappers.AfspeellijstDataMapper;
+import domain.datamappers.TrackDataMapper;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -10,10 +11,24 @@ public class Spotitube {
     private AfspeellijstDAO afspeellijstDAO;
     private TrackDAO trackDAO;
     private Afspeellijst afspeellijst;
+    private AfspeellijstDataMapper afspeellijstDataMapper;
+    private TrackDataMapper trackDataMapper;
+
+    @Inject
+    public void setTrackDataMapper(TrackDataMapper trackDataMapper) {
+        this.trackDataMapper = trackDataMapper;
+    }
+
+    @Inject
+    public void setAfspeellijstDataMapper(AfspeellijstDataMapper afspeellijstDataMapper) {
+        this.afspeellijstDataMapper = afspeellijstDataMapper;
+    }
+
     @Inject
     public void setAfspeellijst(Afspeellijst afspeellijst) {
         this.afspeellijst = afspeellijst;
     }
+
     @Inject
     public void setAfspeellijstDAO(AfspeellijstDAO afspeellijstDAO) {
         this.afspeellijstDAO = afspeellijstDAO;
@@ -25,13 +40,13 @@ public class Spotitube {
     }
 
     public Afspeellijst openAfspeellijst(int id) {
-        Afspeellijst afspeellijst = afspeellijstDAO.select(id);
+        Afspeellijst afspeellijst = afspeellijstDataMapper.mapResultSetToDomain(afspeellijstDAO.select(id));
         afspeellijst.setTracks(this.afspeellijst.openTracksAfspeellijst(afspeellijst.getId(), false));
         return afspeellijst;
     }
 
     public List<Afspeellijst> openOverzicht() {
-        List<Afspeellijst> afspeellijsten = afspeellijstDAO.selectAll();
+        List<Afspeellijst> afspeellijsten = afspeellijstDataMapper.mapResultSetToListDomain(afspeellijstDAO.selectAll());
 
         for (Afspeellijst afspeellijst : afspeellijsten) {
             List<Track> tracks = this.afspeellijst.openTracksAfspeellijst(afspeellijst.getId(), false);
@@ -41,7 +56,7 @@ public class Spotitube {
     }
 
     public List<Track> toonTrackOverzicht() {
-        return trackDAO.selectAll();
+        return trackDataMapper.mapResultSetToListDomain(trackDAO.selectAll());
     }
 
     public void verwijderAfspeellijst(int id) {

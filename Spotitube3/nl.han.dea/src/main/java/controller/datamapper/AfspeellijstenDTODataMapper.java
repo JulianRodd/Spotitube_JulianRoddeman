@@ -11,7 +11,8 @@ import java.util.List;
 public class AfspeellijstenDTODataMapper {
     private AfspeellijstDTODataMapper afspeellijstDTODataMapper;
     private Afspeellijst afspeellijst;
-@Inject
+
+    @Inject
     public void setAfspeellijst(Afspeellijst afseellijst) {
         this.afspeellijst = afseellijst;
     }

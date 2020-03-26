@@ -4,8 +4,6 @@ import controller.dtos.EigenaarDTO;
 import controller.dtos.LoginDTO;
 import domain.Eigenaar;
 
-import javax.inject.Inject;
-
 public class EigenaarDTODataMapper {
 
     public LoginDTO mapToDTO(Eigenaar eigenaar) {

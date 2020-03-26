@@ -2,15 +2,12 @@ package datasource.daos;
 
 import datasource.connectie.DatabaseProperties;
 import domain.Afspeellijst;
+import exceptions.eigenexcepties.DatabaseFoutException;
 
 import javax.inject.Inject;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
-public class AfspeellijstDAO{
-    private Logger logger = Logger.getLogger(getClass().getName());
+public class AfspeellijstDAO {
     private DatabaseProperties databaseProperties;
 
     @Inject
@@ -27,48 +24,29 @@ public class AfspeellijstDAO{
             statement.setInt(3, afspeellijst.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een update-fout opgetreden in de tabel afspeellijst");
         }
     }
 
-    public List<Afspeellijst> selectAll() {
-        List<Afspeellijst> afspeellijsten = new ArrayList<Afspeellijst>();
+    public ResultSet selectAll() {
         try {
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM afspeellijst ");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Afspeellijst afspeellijst = new Afspeellijst();
-                afspeellijst.setId(resultSet.getInt("id"));
-                afspeellijst.setNaam(resultSet.getString("naam"));
-                afspeellijst.setEigenaar(resultSet.getString("eigenaar"));
-                afspeellijsten.add(afspeellijst);
-            }
-            return afspeellijsten;
+            return statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een selectAll-fout opgetreden in de tabel afspeellijst");
         }
-        return null;
     }
 
-    public Afspeellijst select(int pk) {
+    public ResultSet select(int pk) {
         try {
             Connection connection = DriverManager.getConnection(databaseProperties.connectionString());
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM afspeellijst WHERE id = ?");
             statement.setInt(1, pk);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Afspeellijst afspeellijst = new Afspeellijst();
-                afspeellijst.setId(resultSet.getInt("id"));
-                afspeellijst.setNaam(resultSet.getString("naam"));
-                afspeellijst.setEigenaar(resultSet.getString("eigenaar"));
-                return afspeellijst;
-            }
-
+            return statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een select-fout opgetreden in de tabel afspeellijst");
         }
-        return null;
     }
 
 
@@ -79,7 +57,7 @@ public class AfspeellijstDAO{
             statement.setInt(1, pk);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een delete-fout opgetreden in de tabel afspeellijst");
         }
     }
 
@@ -92,7 +70,7 @@ public class AfspeellijstDAO{
             statement.setString(3, afspeellijst.getEigenaar());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een insert-fout opgetreden in de tabel afspeellijst");
         }
     }
 
@@ -105,7 +83,7 @@ public class AfspeellijstDAO{
                 return resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseFoutException("Er is een select-fout opgetreden in de tabel afspeellijst");
         }
         return 0;
     }

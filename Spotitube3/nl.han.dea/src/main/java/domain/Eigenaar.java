@@ -1,4 +1,5 @@
 package domain;
+
 import datasource.daos.AfspeellijstDAO;
 import datasource.daos.EigenaarDAO;
 import domain.datamappers.EigenaarDataMapper;
@@ -18,10 +19,12 @@ public class Eigenaar {
     private EigenaarDAO eigenaarDAO;
     private AfspeellijstDAO afspeellijstDao;
     private EigenaarDataMapper eigenaarDataMapper;
+
     @Inject
     public void setEigenaarDataMapper(EigenaarDataMapper eigenaarDataMapper) {
         this.eigenaarDataMapper = eigenaarDataMapper;
     }
+
     @Inject
     public void setEigenaarDAO(EigenaarDAO eigenaarDAO) {
         this.eigenaarDAO = eigenaarDAO;
@@ -34,9 +37,9 @@ public class Eigenaar {
 
     public void setIngelogd(Eigenaar eigenaar) throws OnjuistWachtwoordExceptie {
         Eigenaar geregistreerde = eigenaarDataMapper.mapResultSetToDomain(eigenaarDAO.select(eigenaar.getGebruikersnaam()));
-        if(geregistreerde != null){
-        String wachtwoordHash =  geregistreerde.getWachtwoord();
-        if ((DigestUtils.sha256Hex(eigenaar.getWachtwoord()).equals(wachtwoordHash))) {
+        if (geregistreerde != null) {
+            String wachtwoordHash = geregistreerde.getWachtwoord();
+            if ((DigestUtils.sha256Hex(eigenaar.getWachtwoord()).equals(wachtwoordHash))) {
                 String nieuweToken = UUID.randomUUID().toString();
                 eigenaar.setToken(nieuweToken);
                 eigenaar.setWachtwoord(wachtwoordHash);
@@ -57,6 +60,7 @@ public class Eigenaar {
             throw new VerkeerdeTokenException();
         }
     }
+
     public void maakAfspeellijst(Afspeellijst afspeellijst) {
         afspeellijst.setId(afspeellijstDao.getMaxId() + 1);
         afspeellijstDao.insert(afspeellijst);
@@ -65,27 +69,23 @@ public class Eigenaar {
     public void wijzigAfspeellijst(Afspeellijst afspeellijst) {
         afspeellijstDao.update(afspeellijst);
     }
-	public String getGebruikersnaam() {
-		return gebruikersnaam;
-	}
 
-	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersnaam = gebruikersnaam;
-	}
-
-	public String getWachtwoord() {
-		return wachtwoord;
-	}
-
-	public void setWachtwoord(String wachtwoord) {
-		this.wachtwoord = wachtwoord;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public String getGebruikersnaam() {
+        return gebruikersnaam;
+    }
+    public void setGebruikersnaam(String gebruikersnaam) {
+        this.gebruikersnaam = gebruikersnaam;
+    }
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+    public void setWachtwoord(String wachtwoord) {
+        this.wachtwoord = wachtwoord;
+    }
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

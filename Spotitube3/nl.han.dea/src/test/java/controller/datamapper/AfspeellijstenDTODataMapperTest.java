@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AfspeellijstenDTODataMapperTest {
-
+    private static final int ID = 1;
     private AfspeellijstenDTODataMapper afspeellijstenDTODataMapperUnderTest;
     private AfspeellijstDTODataMapper mockedAfspeellijstDTODataMapper;
     private Afspeellijst mockedAfspeellijst;
@@ -34,7 +34,7 @@ class AfspeellijstenDTODataMapperTest {
         var afspeellijst = new Afspeellijst();
         var afspeellijstDTO = new AfspeellijstDTO();
         int lengte = 10;
-        afspeellijstDTO.setId(0);
+        afspeellijstDTO.setId(ID);
         afspeellijstDTO.setName("name");
         afspeellijstDTO.setOwner(true);
          List<Afspeellijst> afspeellijsten = Arrays.asList(afspeellijst);

@@ -1,4 +1,5 @@
 package controller;
+
 import controller.datamapper.AfspeellijstDTODataMapper;
 import controller.datamapper.AfspeellijstenDTODataMapper;
 import controller.datamapper.TrackDTODataMapper;
@@ -9,6 +10,7 @@ import domain.Afspeellijst;
 import domain.Eigenaar;
 import domain.Spotitube;
 import domain.Track;
+
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,26 +26,32 @@ public class AfspeellijstController {
     private Spotitube spotitube;
     private Eigenaar eigenaar;
     private Afspeellijst afspeellijst;
+
     @Inject
     public void setEigenaar(Eigenaar eigenaar) {
         this.eigenaar = eigenaar;
     }
+
     @Inject
     public void setAfspeellijst(Afspeellijst afspeellijst) {
         this.afspeellijst = afspeellijst;
     }
+
     @Inject
     public void setSpotitube(Spotitube spotitube) {
         this.spotitube = spotitube;
     }
+
     @Inject
     public void setAfspeellijstenDTODataMapper(AfspeellijstenDTODataMapper afspeellijstenDTODataMapper) {
         this.afspeellijstenDTODataMapper = afspeellijstenDTODataMapper;
     }
+
     @Inject
     public void setAfspeellijstDTODataMapper(AfspeellijstDTODataMapper afspeellijstDTODataMapper) {
         this.afspeellijstDTODataMapper = afspeellijstDTODataMapper;
     }
+
     @Inject
     public void setTrackDTODataMapper(TrackDTODataMapper trackDTODataMapper) {
         this.trackDTODataMapper = trackDTODataMapper;
@@ -94,11 +102,11 @@ public class AfspeellijstController {
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
         TracksDTO tracksDTO = new TracksDTO();
         if (id != 0) {
-            for(Track track : afspeellijst.openTracksAfspeellijst(id, true)){
+            for (Track track : afspeellijst.openTracksAfspeellijst(id, true)) {
                 trackDTOs.add(trackDTODataMapper.mapToDTO(track));
             }
-        }else {
-            for(Track track : spotitube.toonTrackOverzicht()){
+        } else {
+            for (Track track : spotitube.toonTrackOverzicht()) {
                 trackDTOs.add(trackDTODataMapper.mapToDTO(track));
             }
         }
@@ -113,7 +121,7 @@ public class AfspeellijstController {
         eigenaar.getEigenaar(token);
         List<TrackDTO> trackDTOs = new ArrayList<TrackDTO>();
         TracksDTO tracksDTO = new TracksDTO();
-        List<Track>tracks = afspeellijst.openTracksAfspeellijst(id, false);
+        List<Track> tracks = afspeellijst.openTracksAfspeellijst(id, false);
         for (Track track : tracks) {
             trackDTOs.add(trackDTODataMapper.mapToDTO(track));
         }
@@ -124,7 +132,7 @@ public class AfspeellijstController {
     @Path("playlists/{afspeellijstId}/tracks/{trackId}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response trackVanAfspeellijst(@PathParam("afspeellijstId") int afspeellijstId, @PathParam("trackId") int trackId, @QueryParam("token") String token) {
+    public Response verwijderTrackVanAfspeellijst(@PathParam("afspeellijstId") int afspeellijstId, @PathParam("trackId") int trackId, @QueryParam("token") String token) {
         eigenaar.getEigenaar(token);
         this.afspeellijst.verwijderTrack(afspeellijstId, trackId);
         return Response.ok().entity(afspeellijstenDTODataMapper.mapToDTO(spotitube.openOverzicht())).build();

@@ -1,8 +1,6 @@
 package domain.datamappers;
-
-import com.mysql.cj.protocol.Resultset;
 import domain.Eigenaar;
-
+import exceptions.eigenexcepties.DatabaseFoutException;
 import java.sql.*;
 
 public class EigenaarDataMapper {
@@ -17,8 +15,8 @@ public class EigenaarDataMapper {
                     return eigenaar;
                 }
             } catch(SQLException e){
-
-            }
+            throw new DatabaseFoutException("Er is heeft een fout opgetreden bij het omzetten van resultset naar Eigenaar");
+        }
         }
         return null;
     }

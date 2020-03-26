@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 public class EigenaarController {
     private EigenaarDTODataMapper eigenaarDTODataMapper;
     private Eigenaar eigenaar;
+
     @Inject
     public void setEigenaar(Eigenaar eigenaar) {
         this.eigenaar = eigenaar;
@@ -31,7 +32,7 @@ public class EigenaarController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(EigenaarDTO eigenaarDTO){
+    public Response login(EigenaarDTO eigenaarDTO) {
         Eigenaar eigenaar = eigenaarDTODataMapper.mapToDomain(eigenaarDTO);
         try {
             this.eigenaar.setIngelogd(eigenaar);
